@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -27,6 +29,12 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"${project.findProperty("BASE_URL") ?: ""}\"")
+            buildConfigField("String", "API_KEY", "\"${project.findProperty("API_KEY") ?: ""}\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"${project.findProperty("BASE_URL") ?: ""}\"")
+            buildConfigField("String", "API_KEY", "\"${project.findProperty("API_KEY") ?: ""}\"")
         }
     }
     compileOptions {
@@ -38,6 +46,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -59,9 +68,23 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation ("com.google.accompanist:accompanist-flowlayout:0.26.3-beta")
-    // gps
-    implementation ("com.google.android.gms:play-services-location:21.3.0")
+    implementation("com.google.accompanist:accompanist-flowlayout:0.26.3-beta")
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.1")
+    implementation ("androidx.activity:activity-ktx:1.9.0")
+    // sqlite
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
+    // retrofit
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
+
+    implementation("com.google.android.gms:play-services-location:21.3.0")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.0-beta02")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")

@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.CloudQueue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -27,7 +24,7 @@ import androidx.compose.ui.unit.dp
 fun CardInfo(
     iconResId: Int,
     infoTitle: String,
-    infoVale: String,
+    infoValue: String,
 ) {
     Column(
         modifier = Modifier
@@ -69,7 +66,8 @@ fun CardInfo(
             )
             Text(
                 fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                text = infoVale,
+                fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
+                text = infoValue,
                 color = MaterialTheme.colorScheme.primary
             )
         }
@@ -79,5 +77,5 @@ fun CardInfo(
 @Composable
 @Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
 fun CardInfoPreview() {
-//
+
 }

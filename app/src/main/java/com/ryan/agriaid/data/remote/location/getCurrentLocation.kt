@@ -1,4 +1,4 @@
-package com.ryan.agriaid.profile
+package com.ryan.agriaid.data.remote.location
 
 import android.annotation.SuppressLint
 import android.content.Context
