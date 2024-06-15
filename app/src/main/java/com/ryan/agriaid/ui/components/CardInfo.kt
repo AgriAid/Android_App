@@ -1,4 +1,4 @@
-package com.ryan.agriaid.components
+package com.ryan.agriaid.ui.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.ryan.agriaid.home
+package com.ryan.agriaid.ui.screen.home
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -51,9 +51,9 @@ import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.ryan.agriaid.R
-import com.ryan.agriaid.components.BannerArticle
-import com.ryan.agriaid.components.CardInfo
-import com.ryan.agriaid.components.CardInfoData
+import com.ryan.agriaid.ui.components.BannerArticle
+import com.ryan.agriaid.ui.components.CardInfo
+import com.ryan.agriaid.ui.components.CardInfoData
 import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.article.Article
 import com.ryan.agriaid.data.local.article.ArticleViewModel
@@ -199,36 +199,19 @@ fun GreetingSection(
                         text = name
                     )
                 }
-                if (imageUrl != null) {
-                    Box(
+                Box(
+                    modifier = Modifier
+                        .size(80.dp)
+                        .background(Color.Transparent, CircleShape)
+                ) {
+                    AsyncImage(
+                        model = imageUrl ?: R.drawable.agri_aid_ico,
+                        contentDescription = "Image Profile",
+                        contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(80.dp)
-                            .background(Color.Transparent, CircleShape)
-                    ) {
-                        AsyncImage(
-                            model = imageUrl,
-                            contentDescription = "Image Profile",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(80.dp)
-                                .clip(CircleShape)
-                        )
-                    }
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .size(80.dp)
-                            .background(Color.Transparent, CircleShape)
-                    ) {
-                        AsyncImage(
-                            model = R.drawable.agri_aid_ico,
-                            contentDescription = "Image Profile",
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier
-                                .size(80.dp)
-                                .clip(CircleShape)
-                        )
-                    }
+                            .clip(CircleShape)
+                    )
                 }
             }
         }

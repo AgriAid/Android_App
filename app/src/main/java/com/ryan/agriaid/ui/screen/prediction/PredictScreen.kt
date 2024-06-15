@@ -1,4 +1,4 @@
-package com.ryan.agriaid.prediction
+package com.ryan.agriaid.ui.screen.prediction
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column

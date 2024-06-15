@@ -1,4 +1,4 @@
-package com.ryan.agriaid.components
+package com.ryan.agriaid.ui.components
 
 import androidx.compose.ui.graphics.vector.ImageVector
 
