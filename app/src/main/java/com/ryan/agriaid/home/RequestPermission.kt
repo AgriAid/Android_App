@@ -1,4 +1,4 @@
-package com.ryan.agriaid.profile
+package com.ryan.agriaid.home
 
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult

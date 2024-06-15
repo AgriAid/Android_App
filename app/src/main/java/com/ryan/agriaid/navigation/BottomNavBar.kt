@@ -99,7 +99,7 @@ fun BottomNavigationBar(navController: NavController) {
                         NavigationBarItem(
                             icon = {
                                 Icon(
-                                    imageVector = if (isSelected) item.iconActive else item.icon,
+                                    painter = painterResource(if (isSelected) item.iconActive else item.icon),
                                     contentDescription = item.title
                                 )
                             },

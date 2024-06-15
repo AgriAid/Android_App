@@ -36,7 +36,9 @@ import com.ryan.agriaid.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BannerArticle(
+    title: String,
     articleImage: Int,
+    author: String,
     onClick: () -> Unit
 ) {
     ElevatedCard(
@@ -68,7 +70,7 @@ fun BannerArticle(
             horizontalAlignment = Alignment.Start
         ) {
             Text(
-                text = "Merawat Jagung dengan bahan alami sehingga mudah digunakan",
+                text = title,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -84,7 +86,7 @@ fun BannerArticle(
                 Spacer(modifier = Modifier.width(5.dp))
                 Text(
                     fontSize = MaterialTheme.typography.bodySmall.fontSize,
-                    text = "Jawa Tengah"
+                    text = author
                 )
             }
         }

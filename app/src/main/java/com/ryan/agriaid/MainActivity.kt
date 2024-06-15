@@ -53,7 +53,6 @@ fun MainScreen() {
             composable(NavRoutes.Home) {
                 HomeScreen(
                     navController,
-                    imageUrl = "https://marketplace.canva.com/EAFHfL_zPBk/1/0/1600w/canva-yellow-inspiration-modern-instagram-profile-picture-kpZhUIzCx_w.jpg",
                     name = "Petani"
                 )
             }
