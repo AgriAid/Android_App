@@ -1,4 +1,4 @@
-package com.ryan.agriaid.home
+package com.ryan.agriaid.ui.screen.home
 
 data class CardInfoData(
    val icon: Int,

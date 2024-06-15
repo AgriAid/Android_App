@@ -1,4 +1,4 @@
-package com.ryan.agriaid.article
+package com.ryan.agriaid.ui.screen.article
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

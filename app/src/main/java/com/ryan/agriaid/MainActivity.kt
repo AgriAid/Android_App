@@ -11,12 +11,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.ryan.agriaid.article.ArticleScreen
-import com.ryan.agriaid.home.HomeScreen
+import com.ryan.agriaid.ui.screen.article.ArticleScreen
+import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.navigation.BottomNavigationBar
 import com.ryan.agriaid.navigation.NavRoutes
-import com.ryan.agriaid.prediction.PredictScreen
-import com.ryan.agriaid.profile.ProfileScreen
+import com.ryan.agriaid.ui.screen.prediction.PredictScreen
+import com.ryan.agriaid.ui.screen.profile.ProfileScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
 
 class MainActivity : ComponentActivity() {
@@ -60,7 +60,9 @@ fun MainScreen() {
                 PredictScreen()
             }
             composable(NavRoutes.Profile) {
-                ProfileScreen()
+                ProfileScreen(
+                    imageUrl = null
+                )
             }
             composable("artikelDetail/{artikelId}") { backStackEntry ->
                 ArticleScreen(backStackEntry)
