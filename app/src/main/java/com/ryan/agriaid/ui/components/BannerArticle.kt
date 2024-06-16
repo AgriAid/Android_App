@@ -26,7 +26,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -79,8 +81,9 @@ fun BannerArticle(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    modifier = Modifier.size(13.dp),
-                    imageVector = Icons.Filled.GpsNotFixed,
+                    modifier = Modifier.size(18.dp),
+                    imageVector = ImageVector
+                        .vectorResource(R.drawable.owner),
                     contentDescription = "Icon Tag"
                 )
                 Spacer(modifier = Modifier.width(5.dp))

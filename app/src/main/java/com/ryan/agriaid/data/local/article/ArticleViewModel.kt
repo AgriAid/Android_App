@@ -15,4 +15,8 @@ class ArticleViewModel(private val repository: ArticleRepository) : ViewModel() 
     fun getAllArticles(): Flow<List<Article>> {
         return repository.getAllArticles()
     }
+
+    suspend fun getArticlesWithDetails(articleId: Int): ArticleWithDetails? {
+        return repository.getArticlesWithDetails(articleId)
+    }
 }
