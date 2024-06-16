@@ -75,24 +75,32 @@ dependencies {
     // sqlite
     implementation("androidx.room:room-runtime:2.6.1")
     implementation ("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.exifinterface:exifinterface:1.3.6")
     kapt("androidx.room:room-compiler:2.6.1")
     // retrofit
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-
+    //viemodel
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.1")
     implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
-
+    // gmaps
     implementation("com.google.android.gms:play-services-location:21.3.0")
     // Navigation
     implementation("androidx.navigation:navigation-compose:2.8.0-beta02")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
-    //    Icon
+    //  Icon
     implementation("androidx.compose.material:material-icons-core:1.6.7")
     implementation("androidx.compose.material:material-icons-extended:1.6.7")
     // image loader
     implementation("io.coil-kt:coil-compose:2.6.0")
+
+    // CameraX core library using the camera2 implementation
+    implementation ("androidx.camera:camera-core:1.3.4")
+    implementation ("androidx.camera:camera-camera2:1.3.4")
+    implementation ("androidx.camera:camera-lifecycle:1.3.4")
+    implementation ("androidx.camera:camera-view:1.3.4")
+    implementation ("androidx.camera:camera-extensions:1.3.4")
     // Tasting
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
