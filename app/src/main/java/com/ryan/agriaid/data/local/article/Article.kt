@@ -8,6 +8,5 @@ data class Article(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val articleImg: Int,
     val title: String,
-    val author: String,
-    val describe: String
+    val author: String
 )

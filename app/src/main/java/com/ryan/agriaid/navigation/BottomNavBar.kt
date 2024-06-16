@@ -6,8 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -49,7 +52,7 @@ fun BottomNavigationBar(navController: NavController) {
                 modifier = Modifier
                     .size(60.dp)
                     .background(
-                        color = MaterialTheme.colorScheme.primary,
+                        color = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
                         shape = RoundedCornerShape(60.dp)
                     )
                     .clickable {
@@ -66,7 +69,10 @@ fun BottomNavigationBar(navController: NavController) {
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = Icons.Default.AdsClick,
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 15.dp),
+                    painter = painterResource(R.drawable.scan),
                     contentDescription = "Predict",
                     tint = MaterialTheme.colorScheme.onPrimary
                 )
@@ -79,7 +85,8 @@ fun BottomNavigationBar(navController: NavController) {
                 .height(50.dp)
                 .paint(
                     painter = painterResource(R.drawable.bottom_nav_bg),
-                    contentScale = ContentScale.FillWidth
+                    contentScale = ContentScale.FillWidth,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.secondary.copy(blue = 0.5f))
                 )
         ) {
             Row(
@@ -99,6 +106,8 @@ fun BottomNavigationBar(navController: NavController) {
                         NavigationBarItem(
                             icon = {
                                 Icon(
+                                    modifier = Modifier
+                                        .size(if (isSelected) 25.dp else 20.dp),
                                     painter = painterResource(if (isSelected) item.iconActive else item.icon),
                                     contentDescription = item.title
                                 )
@@ -106,9 +115,9 @@ fun BottomNavigationBar(navController: NavController) {
                             alwaysShowLabel = false,
                             selected = isSelected,
                             colors = NavigationBarItemDefaults.colors(
-                                selectedIconColor = MaterialTheme.colorScheme.secondary,
+                                selectedIconColor = Color.White,
                                 unselectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                                indicatorColor = MaterialTheme.colorScheme.primary
+                                indicatorColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f)
                             ),
                             onClick = {
                                 navController.navigate(item.route) {

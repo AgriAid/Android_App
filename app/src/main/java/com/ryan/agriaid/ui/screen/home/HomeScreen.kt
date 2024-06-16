@@ -57,6 +57,7 @@ import com.ryan.agriaid.ui.components.CardInfoData
 import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.article.Article
 import com.ryan.agriaid.data.local.article.ArticleViewModel
+import com.ryan.agriaid.data.local.user.User
 import com.ryan.agriaid.data.remote.WeatherViewModel
 import com.ryan.agriaid.data.remote.location.getCurrentLocation
 import com.ryan.agriaid.data.remote.model.WeatherForecastResponse
@@ -66,7 +67,7 @@ import com.ryan.agriaid.utility.TimeHelper
 @Composable
 fun HomeScreen(
     navController: NavController,
-    name: String = "Petani",
+    user: User?,
 ) {
     val greeting = TimeHelper.getCurrentGreeting()
 
@@ -82,8 +83,6 @@ fun HomeScreen(
             getCurrentLocation(context) { latitude, longitude ->
                 location = Pair(latitude, longitude)
             }
-        } else {
-            Log.e("test123", "tidak acc")
         }
     }
 
@@ -114,21 +113,14 @@ fun HomeScreen(
         }
     }
 
-    Log.e("test", "averageTempAndHumidity: $averageTempAndHumidity")
-    Log.e("test", "rainfalldata $rainfalldata")
-    Log.e("test", "location: $location")
-    Log.e("test", "location: ${weatherData?.city?.name}, ${weatherData?.city?.country}")
-
-
-//    val imageUrl ="https://marketplace.canva.com/EAFHfL_zPBk/1/0/1600w/canva-yellow-inspiration-modern-instagram-profile-picture-kpZhUIzCx_w.jpg"
-    val imageUrl = null
+    val imageUrl = R.drawable.agri_aid_ico
 
     val characteristicList = listOf(
-        CardInfoData(R.drawable.temp, "Suhu", "${averageTempAndHumidity?.first?.toInt()}\u00B0C"),
+        CardInfoData(R.drawable.temp, "Suhu", "${weatherData?.list?.get(0)?.main?.temp ?: 0.0}\u00B0C"),
         CardInfoData(
             R.drawable.humadity,
             "Kelambaban",
-            "${averageTempAndHumidity?.second?.toInt()}%"
+            "${weatherData?.list?.get(0)?.main?.humidity ?: 0.0}%"
         ),
         CardInfoData(R.drawable.rainfall, "Curah Hujan", "$rainfalldata mm")
     )
@@ -138,9 +130,9 @@ fun HomeScreen(
     ) {
         GreetingSection(
             greeting = greeting,
-            name = name,
-            imageUrl = imageUrl,
-            cityName = weatherData?.city?.name ?: "null",
+            name = user?.username ?: "Petani",
+            imageUrl = user?.imageUrl ?: imageUrl,
+            cityName = weatherData?.city?.name ?: "tidak ada data",
             temp = weatherData?.list?.get(0)?.main?.temp ?: 0.0
         )
         BannerSection(
@@ -155,7 +147,7 @@ fun HomeScreen(
 fun GreetingSection(
     greeting: String,
     name: String,
-    imageUrl: String?,
+    imageUrl: Comparable<*>,
     cityName: String = "tidak ada data",
     temp: Double = 0.0,
 ) {
@@ -205,7 +197,7 @@ fun GreetingSection(
                         .background(Color.Transparent, CircleShape)
                 ) {
                     AsyncImage(
-                        model = imageUrl ?: R.drawable.agri_aid_ico,
+                        model = imageUrl,
                         contentDescription = "Image Profile",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
@@ -338,6 +330,6 @@ fun HomeScreenPreview() {
     val navController = rememberNavController()
     HomeScreen(
         navController = navController,
-        name = "Petani"
+        user = User(1, "JohnDoe", "Admin", "https://example.com/johndoe.png"),
     )
 }

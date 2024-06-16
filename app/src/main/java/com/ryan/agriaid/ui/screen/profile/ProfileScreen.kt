@@ -34,11 +34,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.ryan.agriaid.R
+import com.ryan.agriaid.data.local.user.User
 import com.ryan.agriaid.ui.components.MenuItem
 
 @Composable
 fun ProfileScreen(
-    imageUrl: String?,
+    user: User?,
+    isLogin: Boolean,
+    onClick : () -> Unit
 ) {
     val dataMenuItems = listOf(
         MenuData(
@@ -54,8 +57,6 @@ fun ProfileScreen(
             title = "Bantuan",
             onClick = {}),
     )
-
-    val isLogin = true
 
     Column(
         modifier = Modifier.fillMaxSize()
@@ -74,7 +75,7 @@ fun ProfileScreen(
                     .background(Color.Transparent, CircleShape)
             ) {
                 AsyncImage(
-                    model = imageUrl ?: R.drawable.agri_aid_ico,
+                    model = user?.imageUrl ?: R.drawable.agri_aid_ico,
                     contentDescription = "Image Profile",
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
@@ -90,22 +91,22 @@ fun ProfileScreen(
                 Text(
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = MaterialTheme.typography.titleLarge.fontWeight,
-                    text = "Nama Ryan",
+                    text = user?.username ?: "Petani Singkkong",
                 )
                 Text(
                     fontSize = MaterialTheme.typography.bodySmall.fontSize,
                     fontWeight = MaterialTheme.typography.bodySmall.fontWeight,
-                    text = "Profile Screen"
+                    text = user?.role ?: "User"
                 )
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
-        MenuList(dataMenuItems = dataMenuItems, isLogin)
+        MenuList(dataMenuItems = dataMenuItems, isLogin, onClick = onClick)
     }
 }
 
 @Composable
-fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean) {
+fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean, onClick: () -> Unit = {}) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -130,7 +131,7 @@ fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean) {
                 ElevatedButton(
                     shape = RoundedCornerShape(15.dp),
                     elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
-                    onClick = { /*TODO*/ })
+                    onClick = onClick)
                 {
                     Text(text = if (isLogin) "Keluar" else "Masuk")
                     Spacer(modifier = Modifier.width(10.dp))
@@ -153,7 +154,9 @@ fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean) {
 fun ProfileScreenPreview() {
     Column(modifier = Modifier.fillMaxSize()) {
         ProfileScreen(
-            imageUrl = null
+            user = User(1, "JohnDoe", "Admin", "https://example.com/johndoe.png"),
+            isLogin = true,
+            onClick = {}
         )
     }
 }
