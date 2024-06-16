@@ -1,14 +1,22 @@
 package com.ryan.agriaid.ui.screen.prediction
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.ryan.agriaid.ui.screen.prediction.camera.CameraPermission
+import com.ryan.agriaid.ui.screen.prediction.camera.CameraPreviewScreen
 
 @Composable
 fun PredictScreen() {
-    Box(modifier = Modifier.fillMaxSize()) {
-        Text(text = "Predict Screen")
+
+    var hasPermission by remember { mutableStateOf(false) }
+
+    if (hasPermission) {
+        CameraPreviewScreen()
+    } else {
+        CameraPermission(onPermissionGranted = { hasPermission = true })
     }
 }
+

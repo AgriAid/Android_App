@@ -1,6 +1,5 @@
 package com.ryan.agriaid.ui.screen.home
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -37,9 +36,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -51,9 +52,6 @@ import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
 import com.google.accompanist.flowlayout.MainAxisAlignment
 import com.ryan.agriaid.R
-import com.ryan.agriaid.ui.components.BannerArticle
-import com.ryan.agriaid.ui.components.CardInfo
-import com.ryan.agriaid.ui.components.CardInfoData
 import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.article.Article
 import com.ryan.agriaid.data.local.article.ArticleViewModel
@@ -61,6 +59,9 @@ import com.ryan.agriaid.data.local.user.User
 import com.ryan.agriaid.data.remote.WeatherViewModel
 import com.ryan.agriaid.data.remote.location.getCurrentLocation
 import com.ryan.agriaid.data.remote.model.WeatherForecastResponse
+import com.ryan.agriaid.ui.components.BannerArticle
+import com.ryan.agriaid.ui.components.CardInfo
+import com.ryan.agriaid.ui.components.CardInfoData
 import com.ryan.agriaid.utility.TimeHelper
 
 
@@ -116,13 +117,17 @@ fun HomeScreen(
     val imageUrl = R.drawable.agri_aid_ico
 
     val characteristicList = listOf(
-        CardInfoData(R.drawable.temp, "Suhu", "${weatherData?.list?.get(0)?.main?.temp ?: 0.0}\u00B0C"),
+        CardInfoData(
+            R.drawable.temp,
+            "Suhu",
+            "${(weatherData?.list?.get(0)?.main?.temp)?.toInt() ?: 0.0}\u00B0C"
+        ),
         CardInfoData(
             R.drawable.humadity,
             "Kelambaban",
-            "${weatherData?.list?.get(0)?.main?.humidity ?: 0.0}%"
+            "${(weatherData?.list?.get(0)?.main?.humidity)?.toInt() ?: 0.0}%"
         ),
-        CardInfoData(R.drawable.rainfall, "Curah Hujan", "$rainfalldata mm")
+        CardInfoData(R.drawable.rainfall, "Curah Hujan", "${rainfalldata.toInt()} mm")
     )
 
     Column(
@@ -227,7 +232,7 @@ fun GreetingSection(
                     Column {
                         Row {
                             Icon(
-                                imageVector = Icons.Filled.AddLocation,
+                                imageVector = ImageVector.vectorResource(R.drawable.location),
                                 contentDescription = "Favorite Icon",
                                 tint = MaterialTheme.colorScheme.primary
                             )
