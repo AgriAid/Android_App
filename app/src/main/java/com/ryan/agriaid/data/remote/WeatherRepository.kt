@@ -1,13 +1,18 @@
 package com.ryan.agriaid.data.remote
 
-import android.util.Log
+import android.content.Context
 import com.ryan.agriaid.BuildConfig
+import com.ryan.agriaid.data.local.NewsDatabase
+import com.ryan.agriaid.data.local.weather.Weather
+import com.ryan.agriaid.data.local.weather.WeatherDao
 import com.ryan.agriaid.data.remote.model.ListItem
 import com.ryan.agriaid.data.remote.model.WeatherForecastResponse
 import com.ryan.agriaid.utility.RainIntensityHelper
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
-class WeatherRepository {
+class WeatherRepository(context: Context) {
+   private val weatherDao: WeatherDao = NewsDatabase.getInstance(context).weatherDao()
 
     private val apiKey = BuildConfig.API_KEY
     private val apiService = ApiConfig.getApiServiceWithAuth(apiKey)
@@ -39,5 +44,17 @@ class WeatherRepository {
             totalRainfall += rainfallForItem
         }
         return totalRainfall
+    }
+
+    suspend fun saveWeatherData(weatherData: List<Weather>) {
+        weatherDao.insertAll(weatherData)
+    }
+
+    fun getAllSavedWeather(): Flow<List<Weather>> {
+        return weatherDao.getAllWeather()
+    }
+
+    suspend fun deleteAllSavedWeather() {
+        weatherDao.deleteAll()
     }
 }
