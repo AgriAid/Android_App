@@ -9,5 +9,6 @@ data class ArticleDetail(
     @PrimaryKey(autoGenerate = false) val id: Int = 0,
     val p1 : String,
     val p2 : String,
-    val p3 : String
+    val p3 : String,
+    val url : String
 )

@@ -8,5 +8,6 @@ data class ArticleWithDetails(
     val detailId: Int,
     val p1: String,
     val p2: String,
-    val p3: String
+    val p3: String,
+    val url : String
 )

@@ -4,11 +4,21 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,10 +27,10 @@ import androidx.navigation.compose.rememberNavController
 import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.user.User
 import com.ryan.agriaid.data.local.user.UserViewModel
-import com.ryan.agriaid.ui.screen.article.ArticleScreen
-import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.navigation.BottomNavigationBar
 import com.ryan.agriaid.navigation.NavRoutes
+import com.ryan.agriaid.ui.screen.article.ArticleScreen
+import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.ui.screen.prediction.PredictScreen
 import com.ryan.agriaid.ui.screen.profile.ProfileScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
@@ -37,6 +47,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
@@ -53,6 +64,30 @@ fun MainScreen() {
     val isLogin = user != null
 
     Scaffold(
+        topBar = {
+            if (currentRoute == "artikelDetail/{artikelId}") {
+                TopAppBar(
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
+                        titleContentColor = MaterialTheme.colorScheme.onPrimary,
+                        navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
+                    ),
+                    title = { Text("Detail Artikel") },
+                    navigationIcon = {
+                        IconButton(
+                            onClick = {
+                                navController.navigateUp()
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.ArrowBackIosNew,
+                                contentDescription = "Back"
+                            )
+                        }
+                    },
+                )
+            }
+        },
         bottomBar = {
             if (currentRoute in screensWithBottomNav) {
                 BottomNavigationBar(navController)
