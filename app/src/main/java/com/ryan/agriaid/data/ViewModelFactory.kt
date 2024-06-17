@@ -43,7 +43,7 @@ class ViewModelFactory(
                 val userRepository = UserRepository(userPreferences)
                 instance ?: ViewModelFactory(
                     ArticleRepository(context),
-                    WeatherRepository(),
+                    WeatherRepository(context),
                     userRepository
                 ).also { instance = it }
             }
