@@ -24,7 +24,7 @@ interface ArticleDao {
     @Query(
         """
     SELECT a.id as articleId, a.articleImg, a.title, a.author,
-           d.id as detailId, d.p1, d.p2, d.p3
+           d.id as detailId, d.p1, d.p2, d.p3, d.url
     FROM article_table a
     INNER JOIN article_detail_table d ON a.id = d.id
     WHERE a.id = :articleId
