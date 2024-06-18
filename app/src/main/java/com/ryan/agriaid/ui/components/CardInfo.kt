@@ -1,6 +1,5 @@
 package com.ryan.agriaid.ui.components
 
-import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -60,22 +58,17 @@ fun CardInfo(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                fontSize = MaterialTheme.typography.labelSmall.fontSize,
+                fontWeight = MaterialTheme.typography.labelSmall.fontWeight,
                 text = infoTitle,
                 color = MaterialTheme.colorScheme.primary
             )
             Text(
-                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                fontSize = MaterialTheme.typography.bodyLarge.fontSize,
                 fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
                 text = infoValue,
                 color = MaterialTheme.colorScheme.primary
             )
         }
     }
-}
-
-@Composable
-@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_NO)
-fun CardInfoPreview() {
-
 }
