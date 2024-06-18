@@ -36,11 +36,11 @@ class WeatherRepository(context: Context) {
         return Pair(averageTemp, averageHumidity)
     }
 
-    fun calculateRainfall(weatherList: List<ListItem>): Double {
+    fun calculateRainfall(weatherList: List<Weather>): Double {
         var totalRainfall = 0.0
         for (weatherItem in weatherList) {
-            val weatherCodes = weatherItem.weather?.mapNotNull { it?.id } ?: emptyList()
-            val rainfallForItem = RainIntensityHelper.getTotalRainfall(weatherCodes)
+            val codes = weatherList.map { it.code }
+            val rainfallForItem = RainIntensityHelper.getTotalRainfall(codes)
             totalRainfall += rainfallForItem
         }
         return totalRainfall

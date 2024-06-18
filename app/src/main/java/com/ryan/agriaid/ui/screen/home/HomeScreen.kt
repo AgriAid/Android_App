@@ -1,5 +1,6 @@
 package com.ryan.agriaid.ui.screen.home
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,8 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AddLocation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -56,13 +55,18 @@ import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.article.Article
 import com.ryan.agriaid.data.local.article.ArticleViewModel
 import com.ryan.agriaid.data.local.user.User
+import com.ryan.agriaid.data.local.weather.Weather
 import com.ryan.agriaid.data.remote.WeatherViewModel
 import com.ryan.agriaid.data.remote.location.getCurrentLocation
-import com.ryan.agriaid.data.remote.model.WeatherForecastResponse
 import com.ryan.agriaid.ui.components.BannerArticle
 import com.ryan.agriaid.ui.components.CardInfo
 import com.ryan.agriaid.ui.components.CardInfoData
+import com.ryan.agriaid.utility.NetworkUtils
 import com.ryan.agriaid.utility.TimeHelper
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 @Composable
@@ -90,28 +94,37 @@ fun HomeScreen(
     // weather
     val weatherViewModel: WeatherViewModel =
         viewModel(factory = ViewModelFactory.getInstance(context))
-    LaunchedEffect(location) {
-        location?.let {
-            weatherViewModel.getWeatherForecast(
-                it.first.toString(),
-                it.second.toString(),
-                "ID"
-            )
+
+    var weatherData by remember { mutableStateOf<Weather?>(null) }
+    var rainfallData by remember { mutableStateOf(0.0) }
+
+    LaunchedEffect(true) {
+        val isConnected = NetworkUtils.isNetworkAvailable(context)
+        if (!isConnected) {
+            location?.let {
+                weatherViewModel.getWeatherForecast(
+                    it.first.toString(),
+                    it.second.toString(),
+                    "ID"
+                )
+            }
+        } else {
+            val dateTimeNow = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            val formattedDateTime = dateTimeNow.format(formatter)
+
+            println("Formatted DateTime: $formattedDateTime")
+            Log.e("test", "anda offline")
+            weatherViewModel.getWeatherByDateTime(formattedDateTime)
+        }
+
+        rainfallData = withContext(Dispatchers.IO) {
+            weatherViewModel.calculateTotalRainfall()
         }
     }
-    val weatherData: WeatherForecastResponse? by weatherViewModel.weatherForecast.observeAsState()
 
-
-    var averageTempAndHumidity by remember { mutableStateOf<Pair<Double, Double>?>(null) }
-    var rainfalldata by remember { mutableStateOf(0.0) }
-
-
-    LaunchedEffect(weatherData) {
-        weatherData?.list?.let { list ->
-            val nonNullList = list.filterNotNull()
-            averageTempAndHumidity = weatherViewModel.getAverageTempAndHumidity(nonNullList)
-            rainfalldata = weatherViewModel.getRainfallData(nonNullList)
-        }
+    weatherViewModel.weatherData.observeAsState().value?.let {
+        weatherData = it
     }
 
     val imageUrl = R.drawable.agri_aid_ico
@@ -119,15 +132,15 @@ fun HomeScreen(
     val characteristicList = listOf(
         CardInfoData(
             R.drawable.temp,
-            "Suhu",
-            "${(weatherData?.list?.get(0)?.main?.temp)?.toInt() ?: 0.0}\u00B0C"
+            "Terasa Seperti",
+            "${(weatherData?.feelsLike)?.toInt() ?: 0.0}\u00B0C"
         ),
         CardInfoData(
             R.drawable.humadity,
             "Kelambaban",
-            "${(weatherData?.list?.get(0)?.main?.humidity)?.toInt() ?: 0.0}%"
+            "${(weatherData?.humidity) ?: 0.0}%"
         ),
-        CardInfoData(R.drawable.rainfall, "Curah Hujan", "${rainfalldata.toInt()} mm")
+        CardInfoData(R.drawable.rainfall, "Curah Hujan", "${rainfallData.toInt()} mm")
     )
 
     Column(
@@ -137,8 +150,8 @@ fun HomeScreen(
             greeting = greeting,
             name = user?.username ?: "Petani",
             imageUrl = user?.imageUrl ?: imageUrl,
-            cityName = weatherData?.city?.name ?: "tidak ada data",
-            temp = weatherData?.list?.get(0)?.main?.temp ?: 0.0
+            cityName = weatherData?.city ?: "tidak ada data",
+            temp = weatherData?.temp ?: 0.0
         )
         BannerSection(
             navController = navController,
