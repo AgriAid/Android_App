@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ryan.agriaid.data.local.weather.Weather
-import com.ryan.agriaid.data.remote.model.ListItem
 import com.ryan.agriaid.data.remote.model.WeatherForecastResponse
 import com.ryan.agriaid.utility.toWeatherList
 import kotlinx.coroutines.flow.Flow
@@ -22,6 +21,7 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
     val weatherData: LiveData<Weather> = _weather
 
     fun getWeatherForecast(lat: String, lon: String, lang: String) {
+        Log.e("test", "masuk ke get weather forecast")
         viewModelScope.launch {
             val response: Response<WeatherForecastResponse> =
                 weatherRepository.getWeatherForecast(lat, lon, lang)
@@ -29,15 +29,18 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
                 val weatherResponse: WeatherForecastResponse? = response.body()
                 weatherResponse?.let {
                     val weatherList = mappingWeatherList(it)
+                    Log.e("test", "hasil data yang di minta ${weatherList[0]}")
                     saveWeatherData(weatherList)
                     _weather.postValue(weatherList[0])
                 }
+            } else {
+                Log.e("test", "error ${response.message()}")
             }
         }
     }
 
-    fun getAverageTempAndHumidity(weatherList: List<ListItem>): Pair<Double, Double> {
-        return weatherRepository.calculateAverageTempAndHumidity(weatherList)
+    suspend fun getAverageTempAndHumidityRainfall(): Triple<Double, Double, Double> {
+        return weatherRepository.avgTempAndHumidityRainfall()
     }
 
     private fun saveWeatherData(weatherList: List<Weather>) {
@@ -64,12 +67,6 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
                     previousWeather = weather
                 }
             }
-        }
-
-        previousWeather?.let {
-            Log.e("test", "Data cuaca sebelumnya yang ditemukan: $it")
-        } ?: run {
-            Log.e("test", "Tidak ada data cuaca sebelumnya yang cocok ditemukan untuk datetime $dateTime")
         }
         _weather.postValue(previousWeather)
     }

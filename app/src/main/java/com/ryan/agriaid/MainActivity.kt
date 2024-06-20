@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -65,14 +64,19 @@ fun MainScreen() {
 
     Scaffold(
         topBar = {
-            if (currentRoute == "artikelDetail/{artikelId}") {
+            if (currentRoute == "artikelDetail/{artikelId}" || currentRoute == NavRoutes.Predict) {
                 TopAppBar(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
                         titleContentColor = MaterialTheme.colorScheme.onPrimary,
                         navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
                     ),
-                    title = { Text("Detail Artikel") },
+                    title = {
+                        Text(
+                            text = if (currentRoute == "artikelDetail/{artikelId}") "Detail Artikel"
+                            else "Masukan Data"
+                        )
+                    },
                     navigationIcon = {
                         IconButton(
                             onClick = {
@@ -115,7 +119,14 @@ fun MainScreen() {
                         if (user != null) {
                             userViewModel.clearUser()
                         } else {
-                            userViewModel.saveUser(User(1, "JohnDoe", "Admin", "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"))
+                            userViewModel.saveUser(
+                                User(
+                                    1,
+                                    "JohnDoe",
+                                    "Admin",
+                                    "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                                )
+                            )
                         }
                     }
                 )
