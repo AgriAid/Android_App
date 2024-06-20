@@ -30,7 +30,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.ryan.agriaid.R
@@ -145,18 +144,5 @@ fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean, onClick: () -> Uni
                 }
             }
         }
-
-    }
-}
-
-@Composable
-@Preview(name = "ProfileScreen Preview", showBackground = true)
-fun ProfileScreenPreview() {
-    Column(modifier = Modifier.fillMaxSize()) {
-        ProfileScreen(
-            user = User(1, "JohnDoe", "Admin", "https://example.com/johndoe.png"),
-            isLogin = true,
-            onClick = {}
-        )
     }
 }

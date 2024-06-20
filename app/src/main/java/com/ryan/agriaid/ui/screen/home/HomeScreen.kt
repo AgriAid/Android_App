@@ -82,14 +82,20 @@ fun HomeScreen(
     val articles by viewModel.getAllArticles().collectAsState(initial = emptyList())
 
     var location by remember { mutableStateOf<Pair<Double, Double>?>(null) }
+    var isPermissionGranted by remember { mutableStateOf(false) }
 
     RequestPermission { granted ->
         if (granted) {
+            isPermissionGranted = true
             getCurrentLocation(context) { latitude, longitude ->
                 location = Pair(latitude, longitude)
             }
+        } else {
+            isPermissionGranted = false
         }
     }
+
+    Log.e("test", "dengan lokasi1 $location")
 
     // weather
     val weatherViewModel: WeatherViewModel =
@@ -98,23 +104,24 @@ fun HomeScreen(
     var weatherData by remember { mutableStateOf<Weather?>(null) }
     var rainfallData by remember { mutableStateOf(0.0) }
 
-    LaunchedEffect(true) {
+    LaunchedEffect(location, isPermissionGranted) {
         val isConnected = NetworkUtils.isNetworkAvailable(context)
-        if (!isConnected) {
-            location?.let {
+        Log.e("test", "anda sedang online? $isConnected")
+        Log.e("test", "dengan lokasi2 $location")
+
+        if (isConnected && isPermissionGranted && location != null) {
+            location?.let { loc ->
                 weatherViewModel.getWeatherForecast(
-                    it.first.toString(),
-                    it.second.toString(),
+                    loc.first.toString(),
+                    loc.second.toString(),
                     "ID"
                 )
             }
         } else {
+            Log.e("test", "anda sedang offline")
             val dateTimeNow = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             val formattedDateTime = dateTimeNow.format(formatter)
-
-            println("Formatted DateTime: $formattedDateTime")
-            Log.e("test", "anda offline")
             weatherViewModel.getWeatherByDateTime(formattedDateTime)
         }
 

@@ -5,10 +5,10 @@ import com.ryan.agriaid.BuildConfig
 import com.ryan.agriaid.data.local.NewsDatabase
 import com.ryan.agriaid.data.local.weather.Weather
 import com.ryan.agriaid.data.local.weather.WeatherDao
-import com.ryan.agriaid.data.remote.model.ListItem
 import com.ryan.agriaid.data.remote.model.WeatherForecastResponse
 import com.ryan.agriaid.utility.RainIntensityHelper
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import retrofit2.Response
 
 class WeatherRepository(context: Context) {
@@ -21,19 +21,21 @@ class WeatherRepository(context: Context) {
         return apiService.getWeatherForecast(lat, lon, apiKey, lang, "metric")
     }
 
-    fun calculateAverageTempAndHumidity(weatherList: List<ListItem>): Pair<Double, Double> {
+    suspend fun avgTempAndHumidityRainfall(): Triple<Double, Double, Double> {
+        val weatherList = getAllSavedWeather().first()
         var totalTemp = 0.0
         var totalHumidity = 0.0
+        val rainFall = calculateRainfall(weatherList)
 
         for (weatherItem in weatherList) {
-            weatherItem.main?.temp?.let { totalTemp += it }
-            weatherItem.main?.humidity?.let { totalHumidity += it }
+            weatherItem.temp.let { totalTemp += it }
+            weatherItem.humidity.let { totalHumidity += it }
         }
 
-        val averageTemp = totalTemp / weatherList.size
-        val averageHumidity = totalHumidity / weatherList.size
+        val averageTemp = if (weatherList.isNotEmpty()) totalTemp / weatherList.size else 0.0
+        val averageHumidity = if (weatherList.isNotEmpty()) totalHumidity / weatherList.size else 0.0
 
-        return Pair(averageTemp, averageHumidity)
+        return Triple(averageTemp, averageHumidity, rainFall)
     }
 
     fun calculateRainfall(weatherList: List<Weather>): Double {
