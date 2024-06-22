@@ -12,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -25,7 +26,8 @@ fun CustomOutlinedTextField(
     onValueChange: (String) -> Unit,
     modifier: Modifier = Modifier,
     imeAction: ImeAction,
-    onImeAction: () -> Unit
+    onImeAction: () -> Unit,
+    borderColor: Color = MaterialTheme.colorScheme.primary.copy(blue = 0.5f)
 ) {
     Column(
         modifier = Modifier
@@ -42,8 +44,8 @@ fun CustomOutlinedTextField(
             label = { Text(label) },
             textStyle = TextStyle.Default.copy(color = MaterialTheme.colorScheme.primary.copy(blue = 0.5f)),
             colors = OutlinedTextFieldDefaults.colors(
-                focusedBorderColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
-                unfocusedBorderColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f)
+                focusedBorderColor = borderColor,
+                unfocusedBorderColor = borderColor
             ),
             modifier = modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(

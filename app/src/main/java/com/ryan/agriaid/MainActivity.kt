@@ -19,10 +19,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.user.User
 import com.ryan.agriaid.data.local.user.UserViewModel
@@ -32,6 +34,7 @@ import com.ryan.agriaid.ui.screen.article.ArticleScreen
 import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.ui.screen.prediction.PredictScreen
 import com.ryan.agriaid.ui.screen.profile.ProfileScreen
+import com.ryan.agriaid.ui.screen.result.ResultScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
 
 class MainActivity : ComponentActivity() {
@@ -64,7 +67,7 @@ fun MainScreen() {
 
     Scaffold(
         topBar = {
-            if (currentRoute == "artikelDetail/{artikelId}" || currentRoute == NavRoutes.Predict) {
+            if (currentRoute !in screensWithBottomNav) {
                 TopAppBar(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
@@ -73,8 +76,12 @@ fun MainScreen() {
                     ),
                     title = {
                         Text(
-                            text = if (currentRoute == "artikelDetail/{artikelId}") "Detail Artikel"
-                            else "Masukan Data"
+                            text = when (currentRoute) {
+                                "artikelDetail/{artikelId}" -> "Detail Artikel"
+                                NavRoutes.Predict -> "Masukan Data"
+                                "${NavRoutes.Result}/{results}" -> "Rekomendasi Tanaman"
+                                else -> ""
+                            }
                         )
                     },
                     navigationIcon = {
@@ -109,7 +116,7 @@ fun MainScreen() {
                 )
             }
             composable(NavRoutes.Predict) {
-                PredictScreen()
+                PredictScreen(navController)
             }
             composable(NavRoutes.Profile) {
                 ProfileScreen(
@@ -130,6 +137,20 @@ fun MainScreen() {
                         }
                     }
                 )
+            }
+            composable(
+                route = "${NavRoutes.Result}/{results}",
+                arguments = listOf(navArgument("results") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val results = backStackEntry.arguments?.getString("results")
+                if (results != null) {
+                    ResultScreen(
+                        results = results.split(","),
+                        onBackClicked = { navController.popBackStack() }
+                    )
+                } else {
+                    // Handle case where results are not available
+                }
             }
             composable("artikelDetail/{artikelId}") { backStackEntry ->
                 ArticleScreen(backStackEntry)
