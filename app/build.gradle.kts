@@ -94,7 +94,9 @@ dependencies {
     implementation("androidx.compose.material:material-icons-extended:1.6.7")
     // image loader
     implementation("io.coil-kt:coil-compose:2.6.0")
-
+    // tflite
+    implementation("org.tensorflow:tensorflow-lite:2.15.0")
+    implementation("org.tensorflow:tensorflow-lite-support:0.3.1")
     // CameraX core library using the camera2 implementation
     implementation ("androidx.camera:camera-core:1.3.4")
     implementation ("androidx.camera:camera-camera2:1.3.4")
