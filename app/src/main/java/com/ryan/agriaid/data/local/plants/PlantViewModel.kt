@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 
 class PlantViewModel(private val plantRepository: PlantRepository) : ViewModel() {
 
-    suspend fun getPlantDetails(plantName: String): List<PlantDetails> {
+    suspend fun getPlantDetails(plantName: String): PlantDetails {
         return plantRepository.getPlantDetailsByName(plantName)
     }
 

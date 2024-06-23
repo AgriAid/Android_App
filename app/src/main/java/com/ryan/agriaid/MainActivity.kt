@@ -34,6 +34,7 @@ import com.ryan.agriaid.ui.screen.article.ArticleScreen
 import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.ui.screen.prediction.PredictScreen
 import com.ryan.agriaid.ui.screen.profile.ProfileScreen
+import com.ryan.agriaid.ui.screen.result.PlantDetailScreen
 import com.ryan.agriaid.ui.screen.result.ResultScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
 
@@ -146,7 +147,9 @@ fun MainScreen() {
                 if (results != null) {
                     ResultScreen(
                         results = results.split(","),
-                        onBackClicked = { navController.popBackStack() }
+                        navigateToPlantDetail = { plantId ->
+                            navController.navigate("plantDetail/$plantId")
+                        }
                     )
                 } else {
                     // Handle case where results are not available
@@ -154,6 +157,12 @@ fun MainScreen() {
             }
             composable("artikelDetail/{artikelId}") { backStackEntry ->
                 ArticleScreen(backStackEntry)
+            }
+            composable("plantDetail/{plantId}") { backStackEntry ->
+                val plantName = backStackEntry.arguments?.getString("plantId")
+                if (plantName != null) {
+                    PlantDetailScreen(plantName)
+                }
             }
         }
     }
