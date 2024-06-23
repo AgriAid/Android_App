@@ -219,47 +219,38 @@ fun PredictScreen(navController: NavController) {
                     ),
                     elevation = ButtonDefaults.buttonElevation(3.dp),
                     onClick = {
-                        val inputs = arrayOf(
-                            floatArrayOf(
-                                6f, 7f, 7f, 7.681673f, 94.47316f, 9.19910f, 150.99951f
-                            ),
-                        )
-                        val results = tfliteViewModel.performInference(inputs)
-                        val resultString = results.joinToString(",")
-                        navController.navigate("${NavRoutes.Result}/$resultString")
+                        if (nitrogen.isEmpty() || fosfor.isEmpty() || kalium.isEmpty() || avgTemp.isEmpty() || avgHumidity.isEmpty() || ph.isEmpty() || avgRainfall.isEmpty()) {
+                            showValidation = true
+                            Toast.makeText(
+                                context,
+                                "Please fill in all the fields",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            return@Button
+                        }
 
-//                        if (nitrogen.isEmpty() || fosfor.isEmpty() || kalium.isEmpty() || avgTemp.isEmpty() || avgHumidity.isEmpty() || ph.isEmpty() || avgRainfall.isEmpty()) {
-//                            showValidation = true
-//                            Toast.makeText(
-//                                context,
-//                                "Please fill in all the fields",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                            return@Button
-//                        }
-//
-//                        try {
-//                            val inputs = arrayOf(
-//                                floatArrayOf(
-//                                    nitrogen.toFloat(),
-//                                    fosfor.toFloat(),
-//                                    kalium.toFloat(),
-//                                    avgTemp.toFloat(),
-//                                    avgHumidity.toFloat(),
-//                                    ph.toFloat(),
-//                                    avgRainfall.toFloat()
-//                                ),
-//                            )
-//                            val results = tfliteViewModel.performInference(inputs)
-//                            val resultString = results.joinToString(",")
-//                            navController.navigate("${NavRoutes.Result}/$resultString")
-//                        } catch (e: NumberFormatException) {
-//                            Toast.makeText(
-//                                context,
-//                                "Please enter valid numbers",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                        }
+                        try {
+                            val inputs = arrayOf(
+                                floatArrayOf(
+                                    nitrogen.toFloat(),
+                                    fosfor.toFloat(),
+                                    kalium.toFloat(),
+                                    avgTemp.toFloat(),
+                                    avgHumidity.toFloat(),
+                                    ph.toFloat(),
+                                    avgRainfall.toFloat()
+                                ),
+                            )
+                            val results = tfliteViewModel.performInference(inputs)
+                            val resultString = results.joinToString(",")
+                            navController.navigate("${NavRoutes.Result}/$resultString")
+                        } catch (e: NumberFormatException) {
+                            Toast.makeText(
+                                context,
+                                "Please enter valid numbers",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
                     }
                 ) {
                     Text("Rekomendasikan")
