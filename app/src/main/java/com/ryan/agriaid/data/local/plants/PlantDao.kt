@@ -10,7 +10,7 @@ interface PlantDao {
 
     @Transaction
     @Query("SELECT * FROM plants WHERE name = :plantName")
-    suspend fun getPlantDetailsByName(plantName: String): List<PlantDetails>
+    suspend fun getPlantDetailsByName(plantName: String): PlantDetails
 
     @Query("SELECT * FROM plants WHERE name = :plantName")
     suspend fun getPlantsByName(plantName: String): Plants

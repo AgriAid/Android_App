@@ -68,112 +68,112 @@ object DatabaseInitializer {
             val plantsData = listOf(
                 Plants(
                     id = 1,
-                    name = "Padi",
+                    name = "padi",
                     description = "Padi adalah tanaman pangan yang berasal dari tanaman padi. Padi biasa ditemukan di daerah tropis dan subtropis.",
                     imgUrl = R.drawable.padi
                 ), Plants(
                     id = 2,
-                    name = "Jagung",
+                    name = "jagung",
                     description = "Jagung adalah tanaman biji-bijian yang memiliki banyak manfaat sebagai bahan pangan dan pakan ternak.",
                     imgUrl = R.drawable.jagung
                 ), Plants(
                     id = 3,
-                    name = "Buncis",
+                    name = "buncis",
                     description = "Buncis adalah tanaman sayuran yang biasa dibudidayakan untuk dikonsumsi sebagai sayuran segar.",
                     imgUrl = R.drawable.buncis
                 ), Plants(
                     id = 4,
-                    name = "Kacang Merah",
+                    name = "kacang_merah",
                     description = "Kacang merah adalah tanaman biji-bijian yang kaya akan protein dan serat.",
                     imgUrl = R.drawable.kacang_merah
                 ), Plants(
                     id = 5,
-                    name = "Kacang Pigeon/Gude",
+                    name = "kacang_gude",
                     description = "Kacang pigeon digunakan dalam berbagai hidangan tradisional untuk nilai gizinya, sebagai pupuk hijau dan pakan ternak dalam pertanian, serta untuk manfaat kesehatan seperti meningkatkan pencernaan dan mengontrol kadar gula darah.",
                     imgUrl = R.drawable.kacang_gude
                 ), Plants(
                     id = 6,
-                    name = "kacang matik",
+                    name = "kacang_matik",
                     description = "Mothbean digunakan dalam masakan tradisional untuk nilai gizinya yang tinggi, serta memberikan manfaat kesehatan seperti meningkatkan pencernaan dan mengatur kadar gula darah, sambil mendukung pertanian berkelanjutan melalui fiksasi nitrogen.",
                     imgUrl = R.drawable.kuda
                 ), Plants(
                     id = 7,
-                    name = "Kacang Hijau",
+                    name = "kacang_hijau",
                     description = "Kacang hijau adalah tanaman biji-bijian yang cepat tumbuh dan memiliki kandungan gizi yang baik.",
                     imgUrl = R.drawable.kacang_hijau
                 ), Plants(
                     id = 8,
-                    name = "Kacang Hitam",
+                    name = "kacang_hitam",
                     description = "Kacang hitam adalah tanaman biji-bijian yang kaya akan serat dan antioksidan.",
                     imgUrl = R.drawable.kacang_hitam
                 ), Plants(
                     id = 9,
-                    name = "Kacang lentis",
+                    name = "kacang_lentis",
                     description = "Kacang lentil digunakan dalam berbagai masakan untuk kandungan proteinnya yang tinggi, serta memberikan manfaat kesehatan seperti meningkatkan pencernaan, dan mendukung kesehatan jantung.",
                     imgUrl = R.drawable.lentis
                 ), Plants(
                     id = 10,
-                    name = "Delima",
+                    name = "delima",
                     description = "Delima adalah buah yang kaya akan vitamin C dan antioksidan, sering dibudidayakan untuk dijual segar atau diolah menjadi minuman.",
                     imgUrl = R.drawable.delima
                 ), Plants(
                     id = 11,
-                    name = "Pisang",
+                    name = "pisang",
                     description = "Pisang adalah buah-buahan tropis yang dikenal dengan rasa manisnya dan memiliki nilai gizi yang tinggi.",
                     imgUrl = R.drawable.pisang
                 ), Plants(
                     id = 12,
-                    name = "Mangga",
+                    name = "mangga",
                     description = "Mangga adalah buah tropis yang memiliki rasa manis dan sering dibudidayakan untuk dikonsumsi segar atau diolah menjadi berbagai produk.",
                     imgUrl = R.drawable.mangga
                 ), Plants(
                     id = 13,
-                    name = "Anggur",
+                    name = "anggur",
                     description = "Anggur adalah buah beri yang tumbuh di pohon anggur dan digunakan untuk membuat anggur atau dimakan langsung.",
                     imgUrl = R.drawable.anggur
                 ), Plants(
                     id = 14,
-                    name = "Semangka",
+                    name = "semangka",
                     description = "Semangka adalah buah berair yang sering dikonsumsi sebagai buah segar atau dijadikan minuman.",
                     imgUrl = R.drawable.semangka
                 ), Plants(
                     id = 15,
-                    name = "Melon",
+                    name = "melon",
                     description = "Melon adalah buah berair dan manis yang sering dikonsumsi sebagai buah segar atau dijadikan campuran dalam salad.",
                     imgUrl = R.drawable.melon
                 ), Plants(
                     id = 16,
-                    name = "Apel",
+                    name = "apel",
                     description = "Apel adalah buah yang kaya akan serat dan vitamin, sering dikonsumsi segar atau diolah menjadi berbagai produk olahan.",
                     imgUrl = R.drawable.apel
                 ), Plants(
                     id = 17,
-                    name = "Jeruk",
+                    name = "jeruk",
                     description = "Jeruk adalah buah berair yang kaya akan vitamin C dan sering dikonsumsi segar atau diolah menjadi jus.",
                     imgUrl = R.drawable.jeruk
                 ), Plants(
                     id = 18,
-                    name = "Pepaya",
+                    name = "pepaya",
                     description = "Pepaya adalah buah tropis yang memiliki rasa manis dan kaya akan vitamin C serta enzim pencernaan.",
                     imgUrl = R.drawable.pepaya
                 ), Plants(
                     id = 19,
-                    name = "Kelapa",
+                    name = "kelapa",
                     description = "Kelapa adalah buah tropis yang memiliki banyak manfaat dari air kelapa hingga dagingnya yang dapat dimakan atau diolah menjadi minyak kelapa.",
                     imgUrl = R.drawable.kelapa
                 ), Plants(
                     id = 20,
-                    name = "Kapas",
+                    name = "kapas",
                     description = "Kapas adalah tanaman serat yang penting dalam industri tekstil untuk membuat benang dan kain.",
                     imgUrl = R.drawable.kapas
                 ), Plants(
                     id = 21,
-                    name = "Rami",
+                    name = "rami",
                     description = "Rami adalah tanaman serat yang juga digunakan dalam industri tekstil untuk membuat kain dan produk lainnya.",
                     imgUrl = R.drawable.rami
                 ), Plants(
                     id = 22,
-                    name = "Kopi",
+                    name = "kopi",
                     description = "Kopi adalah biji-bijian yang digunakan untuk membuat minuman kopi yang disukai oleh banyak orang di seluruh dunia.",
                     imgUrl = R.drawable.kopi
                 )

@@ -7,6 +7,8 @@ import com.ryan.agriaid.data.local.clasification.TFLiteModelInterpreter
 import com.ryan.agriaid.data.local.UserPreferences
 import com.ryan.agriaid.data.local.article.ArticleRepository
 import com.ryan.agriaid.data.local.article.ArticleViewModel
+import com.ryan.agriaid.data.local.plants.PlantRepository
+import com.ryan.agriaid.data.local.plants.PlantViewModel
 import com.ryan.agriaid.data.local.user.UserRepository
 import com.ryan.agriaid.data.local.user.UserViewModel
 import com.ryan.agriaid.data.remote.WeatherRepository
@@ -17,6 +19,7 @@ class ViewModelFactory(
     private val articleRepository: ArticleRepository,
     private val weatherRepository: WeatherRepository,
     private val userRepository: UserRepository,
+    private val plantRepository: PlantRepository,
     private val tfliteModelInterpreter: TFLiteModelInterpreter
 ) : ViewModelProvider.Factory {
 
@@ -33,6 +36,10 @@ class ViewModelFactory(
             @Suppress("UNCHECKED_CAST")
             return UserViewModel(userRepository) as T
         }
+        if (modelClass.isAssignableFrom(PlantViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return PlantViewModel(plantRepository) as T
+        }
         if (modelClass.isAssignableFrom(ClassificationViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return ClassificationViewModel(tfliteModelInterpreter) as T
@@ -47,12 +54,14 @@ class ViewModelFactory(
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
                 val userPreferences = UserPreferences(context)
+                val plantRepository = PlantRepository(context)
                 val userRepository = UserRepository(userPreferences)
                 val tfliteModelInterpreter = TFLiteModelInterpreter(context, "crop_model.tflite")
                 instance ?: ViewModelFactory(
                     ArticleRepository(context),
                     WeatherRepository(context),
                     userRepository,
+                    plantRepository,
                     tfliteModelInterpreter
                 ).also { instance = it }
             }

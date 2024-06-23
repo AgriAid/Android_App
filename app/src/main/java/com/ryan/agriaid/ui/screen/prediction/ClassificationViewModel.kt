@@ -8,8 +8,8 @@ class ClassificationViewModel(
 ) : ViewModel() {
 
     private val labels = listOf(
-        "padi", "jagung", "Buncis", "kacang merah", "kacang Pigeon", "kacang kuda", "kacang hijau", "kacang hitam",
-        "Kacang Kedelai", "delima", "pisang", "mangga", "anggur", "semangka", "melon", "apel", "jeruk", "pepaya",
+        "padi", "jagung", "buncis", "kacang_merah", "kacang_gude", "kacang_matik", "kacang_hijau", "kacang_hitam",
+        "kacang_lentis", "delima", "pisang", "mangga", "anggur", "semangka", "melon", "apel", "jeruk", "pepaya",
         "kelapa", "kapas", "rami", "kopi"
     )
 

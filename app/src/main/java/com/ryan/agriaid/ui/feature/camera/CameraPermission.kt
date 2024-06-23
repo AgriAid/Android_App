@@ -1,4 +1,4 @@
-package com.ryan.agriaid.ui.screen.prediction.camera
+package com.ryan.agriaid.ui.feature.camera
 
 import android.Manifest
 import android.widget.Toast
