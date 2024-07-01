@@ -18,5 +18,5 @@ data class Varieties(
     val plantsId: Int,
     val name: String,
     val superiority: String,
-    val lack: String
+    val weakness: String
 )

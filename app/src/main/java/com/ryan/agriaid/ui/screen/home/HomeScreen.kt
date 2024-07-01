@@ -1,6 +1,6 @@
 package com.ryan.agriaid.ui.screen.home
 
-import android.util.Log
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -64,6 +64,7 @@ import com.ryan.agriaid.ui.components.CardInfoData
 import com.ryan.agriaid.utility.NetworkUtils
 import com.ryan.agriaid.utility.TimeHelper
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -75,7 +76,6 @@ fun HomeScreen(
     user: User?,
 ) {
     val greeting = TimeHelper.getCurrentGreeting()
-
     // article
     val context = LocalContext.current
     val viewModel: ArticleViewModel = viewModel(factory = ViewModelFactory.getInstance(context))
@@ -83,6 +83,17 @@ fun HomeScreen(
 
     var location by remember { mutableStateOf<Pair<Double, Double>?>(null) }
     var isPermissionGranted by remember { mutableStateOf(false) }
+    // weather
+    val weatherViewModel: WeatherViewModel =
+        viewModel(factory = ViewModelFactory.getInstance(context))
+    var weatherData by remember { mutableStateOf<Weather?>(null) }
+    var rainfallData by remember { mutableStateOf(0.0) }
+
+    var isConnected by remember { mutableStateOf(false) }
+    var isVisible by remember { mutableStateOf(true) }
+    val backgroundColor = if (isConnected) Color.Green else Color.Red
+    val message = if (isConnected) "Anda sedang Online!!" else "Anda sedang Offline!! beberapa fungsi mungkin dibatasi"
+
 
     RequestPermission { granted ->
         if (granted) {
@@ -95,21 +106,10 @@ fun HomeScreen(
         }
     }
 
-    Log.e("test", "dengan lokasi1 $location")
+    LaunchedEffect(location) {
+        isConnected = NetworkUtils.isNetworkAvailable(context)
 
-    // weather
-    val weatherViewModel: WeatherViewModel =
-        viewModel(factory = ViewModelFactory.getInstance(context))
-
-    var weatherData by remember { mutableStateOf<Weather?>(null) }
-    var rainfallData by remember { mutableStateOf(0.0) }
-
-    LaunchedEffect(location, isPermissionGranted) {
-        val isConnected = NetworkUtils.isNetworkAvailable(context)
-        Log.e("test", "anda sedang online? $isConnected")
-        Log.e("test", "dengan lokasi2 $location")
-
-        if (isConnected && isPermissionGranted && location != null) {
+        if (isConnected && location != null) {
             location?.let { loc ->
                 weatherViewModel.getWeatherForecast(
                     loc.first.toString(),
@@ -118,7 +118,6 @@ fun HomeScreen(
                 )
             }
         } else {
-            Log.e("test", "anda sedang offline")
             val dateTimeNow = LocalDateTime.now()
             val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
             val formattedDateTime = dateTimeNow.format(formatter)
@@ -128,6 +127,9 @@ fun HomeScreen(
         rainfallData = withContext(Dispatchers.IO) {
             weatherViewModel.calculateTotalRainfall()
         }
+
+        delay(5000)
+        isVisible = false
     }
 
     weatherViewModel.weatherData.observeAsState().value?.let {
@@ -158,7 +160,12 @@ fun HomeScreen(
             name = user?.username ?: "Petani",
             imageUrl = user?.imageUrl ?: imageUrl,
             cityName = weatherData?.city ?: "tidak ada data",
-            temp = weatherData?.temp ?: 0.0
+            temp = weatherData?.temp ?: 0.0,
+            weatherCode = weatherData?.code,
+            isVisible = isVisible,
+            backgroundColor = backgroundColor,
+            message = message
+
         )
         BannerSection(
             navController = navController,
@@ -175,9 +182,16 @@ fun GreetingSection(
     imageUrl: Comparable<*>,
     cityName: String = "tidak ada data",
     temp: Double = 0.0,
+    weatherCode: Int?,
+    isVisible: Boolean,
+    backgroundColor: Color,
+    message: String
 ) {
     val gradientStart = colorResource(R.color.white)
     val gradientEnd = colorResource(R.color.gradientEnd)
+    val isDayTime = isDayTime()
+    val weatherImageDrawable = getWeatherImageDrawable(weatherCode ?: 0, isDayTime)
+
 
     Box(
         modifier = Modifier
@@ -197,6 +211,21 @@ fun GreetingSection(
                     shape = RoundedCornerShape(bottomStart = 15.dp, bottomEnd = 15.dp)
                 )
         ) {
+            if (isVisible) {
+                Box(
+                    modifier = Modifier
+                        .height(20.dp)
+                        .background(color = backgroundColor)
+                ) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 20.dp),
+                        fontSize = MaterialTheme.typography.bodySmall.fontSize,
+                        text = message
+                    )
+                }
+            }
             Row(
                 modifier = Modifier
                     .fillMaxSize()
@@ -271,7 +300,7 @@ fun GreetingSection(
                         )
                     }
                     AsyncImage(
-                        model = R.drawable.rain,
+                        model = weatherImageDrawable,
                         contentDescription = "Weather Image",
                         contentScale = ContentScale.FillWidth,
                         modifier = Modifier.width(90.dp)
@@ -346,6 +375,21 @@ fun BannerSection(
         item {
             Spacer(modifier = Modifier.height(80.dp))
         }
+    }
+}
+
+private fun isDayTime(): Boolean {
+    val currentHour = LocalDateTime.now().hour
+    return currentHour in 6..18
+}
+
+@DrawableRes
+private fun getWeatherImageDrawable(weatherCode: Int, isDayTime: Boolean): Int {
+    return when (weatherCode) {
+        in 200..232 -> R.drawable.storm
+        in 801..804 -> R.drawable.cloud
+        800 -> if (isDayTime) R.drawable.sunny else R.drawable.night
+        else -> R.drawable.rain
     }
 }
 

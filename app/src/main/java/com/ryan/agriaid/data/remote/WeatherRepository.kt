@@ -1,6 +1,7 @@
 package com.ryan.agriaid.data.remote
 
 import android.content.Context
+import android.util.Log
 import com.ryan.agriaid.BuildConfig
 import com.ryan.agriaid.data.local.NewsDatabase
 import com.ryan.agriaid.data.local.weather.Weather
@@ -42,7 +43,7 @@ class WeatherRepository(context: Context) {
         var totalRainfall = 0.0
         for (weatherItem in weatherList) {
             val codes = weatherList.map { it.code }
-            val rainfallForItem = RainIntensityHelper.getTotalRainfall(codes)
+            val rainfallForItem = RainIntensityHelper.getAverageRainfall(codes)
             totalRainfall += rainfallForItem
         }
         return totalRainfall

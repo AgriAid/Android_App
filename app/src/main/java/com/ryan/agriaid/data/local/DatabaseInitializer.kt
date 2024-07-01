@@ -231,17 +231,17 @@ object DatabaseInitializer {
                     plantsId = 1, // Sesuaikan dengan id tanaman padi di tabel Plants
                     name = "IR64",
                     superiority = "Tahan terhadap beberapa hama dan penyakit, hasil panen tinggi, dan kualitas beras baik.",
-                    lack = "Kurang tahan terhadap wereng coklat dan beberapa penyakit daun."
+                    weakness = "Kurang tahan terhadap wereng coklat dan beberapa penyakit daun."
                 ), Varieties(
                     plantsId = 1, // Sesuaikan dengan id tanaman padi di tabel Plants
                     name = "Ciherang",
                     superiority = "Tahan terhadap hama wereng coklat, hasil panen tinggi, dan kualitas beras medium.",
-                    lack = "Rentan terhadap penyakit hawar daun bakteri."
+                    weakness = "Rentan terhadap penyakit hawar daun bakteri."
                 ), Varieties(
                     plantsId = 1, // Sesuaikan dengan id tanaman padi di tabel Plants
                     name = "Inpari 32",
                     superiority = "Tahan terhadap beberapa jenis hama dan penyakit, adaptasi baik di berbagai kondisi lahan.",
-                    lack = "Kualitas beras medium, kurang tahan terhadap kondisi kekeringan."
+                    weakness = "Kualitas beras medium, kurang tahan terhadap kondisi kekeringan."
                 )
                 // tambahkan data untuk varietas lainnya jika ada
             )
@@ -363,17 +363,17 @@ object DatabaseInitializer {
                     plantsId = 2,
                     name = "BISI 18",
                     superiority = "Produktivitas tinggi, adaptasi baik di berbagai kondisi lahan.",
-                    lack = "Memerlukan pemupukan dan pengairan yang tepat untuk hasil optimal."
+                    weakness = "Memerlukan pemupukan dan pengairan yang tepat untuk hasil optimal."
                 ), Varieties(
                     plantsId = 2,
                     name = "NK 22",
                     superiority = "Tahan terhadap hama dan penyakit umum, hasil panen stabil.",
-                    lack = "Memerlukan manajemen air yang baik untuk menghindari kekeringan."
+                    weakness = "Memerlukan manajemen air yang baik untuk menghindari kekeringan."
                 ), Varieties(
                     plantsId = 2,
                     name = "Pionir 28",
                     superiority = "Cepat berbunga dan matang, cocok untuk daerah dengan musim tanam pendek.",
-                    lack = "Rentan terhadap serangan hama penggerek batang."
+                    weakness = "Rentan terhadap serangan hama penggerek batang."
                 )
             )
 
@@ -482,13 +482,13 @@ object DatabaseInitializer {
                     plantsId = 3,
                     name = "Varietas Lokal",
                     superiority = "Adaptasi baik di berbagai kondisi lahan lokal, produktivitas tinggi.",
-                    lack = "Rentan terhadap beberapa hama dan penyakit tertentu."
+                    weakness = "Rentan terhadap beberapa hama dan penyakit tertentu."
                 ),
                 Varieties(
                     plantsId = 3,
                     name = "Varietas Import",
                     superiority = "Kualitas dan hasil panen yang lebih konsisten.",
-                    lack = "Memerlukan perawatan lebih intensif dan pemantauan terhadap kondisi tumbuhnya."
+                    weakness = "Memerlukan perawatan lebih intensif dan pemantauan terhadap kondisi tumbuhnya."
                 )
             )
 
@@ -599,13 +599,13 @@ object DatabaseInitializer {
                     plantsId = 4,
                     name = "Varietas Red Kidney",
                     superiority = "Hasil panen tinggi, kualitas biji baik untuk pasar.",
-                    lack = "Rentan terhadap kondisi tanah yang terlalu lembab."
+                    weakness = "Rentan terhadap kondisi tanah yang terlalu lembab."
                 ),
                 Varieties(
                     plantsId = 4,
                     name = "Varietas Black Turtle",
                     superiority = "Tahan terhadap beberapa hama dan penyakit, adaptasi baik di berbagai kondisi lahan.",
-                    lack = "Memerlukan manajemen air yang baik untuk menghindari kelembaban berlebih."
+                    weakness = "Memerlukan manajemen air yang baik untuk menghindari kelembaban berlebih."
                 )
             )
 
@@ -715,13 +715,13 @@ object DatabaseInitializer {
                     plantsId = 5,
                     name = "Varietas Gude Unggul",
                     superiority = "Hasil panen tinggi, kualitas biji baik untuk konsumsi.",
-                    lack = "Memerlukan perhatian ekstra terhadap hama dan penyakit."
+                    weakness = "Memerlukan perhatian ekstra terhadap hama dan penyakit."
                 ),
                 Varieties(
                     plantsId = 5,
                     name = "Varietas Gude Lokal",
                     superiority = "Adaptasi baik di berbagai kondisi lahan lokal, produktivitas stabil.",
-                    lack = "Rentan terhadap kondisi tanah yang tidak subur."
+                    weakness = "Rentan terhadap kondisi tanah yang tidak subur."
                 )
             )
 
@@ -831,13 +831,13 @@ object DatabaseInitializer {
                     plantsId = 6,
                     name = "Varietas Kacang Kuda Hijau",
                     superiority = "Produktivitas tinggi, adaptasi baik di daerah tropis.",
-                    lack = "Memerlukan perawatan air yang cukup selama musim kering."
+                    weakness = "Memerlukan perawatan air yang cukup selama musim kering."
                 ),
                 Varieties(
                     plantsId = 6,
                     name = "Varietas Kacang Kuda Hitam",
                     superiority = "Kualitas biji yang baik, tahan terhadap hama tertentu.",
-                    lack = "Rentan terhadap penyakit pada kondisi cuaca lembap."
+                    weakness = "Rentan terhadap penyakit pada kondisi cuaca lembap."
                 )
             )
 
@@ -947,13 +947,13 @@ object DatabaseInitializer {
                     plantsId = 7,
                     name = "Varietas Kacang Hijau Biasa",
                     superiority = "Produktivitas tinggi, cocok untuk pengolahan makanan dan pangan.",
-                    lack = "Rentan terhadap serangan hama dan penyakit tertentu."
+                    weakness = "Rentan terhadap serangan hama dan penyakit tertentu."
                 ),
                 Varieties(
                     plantsId = 7,
                     name = "Varietas Kacang Hijau Super",
                     superiority = "Resistensi lebih baik terhadap hama dan penyakit, hasil panen stabil.",
-                    lack = "Memerlukan manajemen air yang baik untuk hasil optimal."
+                    weakness = "Memerlukan manajemen air yang baik untuk hasil optimal."
                 )
             )
 
@@ -1063,13 +1063,13 @@ object DatabaseInitializer {
                     plantsId = 8,
                     name = "Varietas Kacang Hitam Lokal",
                     superiority = "Adaptasi baik di berbagai kondisi lahan lokal, hasil panen stabil.",
-                    lack = "Rentan terhadap serangan hama dan penyakit tertentu."
+                    weakness = "Rentan terhadap serangan hama dan penyakit tertentu."
                 ),
                 Varieties(
                     plantsId = 8,
                     name = "Varietas Kacang Hitam Super",
                     superiority = "Toleransi yang baik terhadap kondisi cuaca ekstrem, kualitas biji yang baik.",
-                    lack = "Memerlukan perawatan ekstra terhadap nutrisi tanah."
+                    weakness = "Memerlukan perawatan ekstra terhadap nutrisi tanah."
                 )
             )
 
@@ -1179,13 +1179,13 @@ object DatabaseInitializer {
                     plantsId = 9,
                     name = "Varietas Lentis Hijau",
                     superiority = "Produktivitas tinggi, adaptasi baik di daerah dengan musim tanam yang pendek.",
-                    lack = "Rentan terhadap serangan hama seperti ulat grayak."
+                    weakness = "Rentan terhadap serangan hama seperti ulat grayak."
                 ),
                 Varieties(
                     plantsId = 9,
                     name = "Varietas Lentis Merah",
                     superiority = "Kualitas biji yang baik, tahan terhadap beberapa jenis hama dan penyakit.",
-                    lack = "Memerlukan manajemen air yang baik untuk hasil optimal."
+                    weakness = "Memerlukan manajemen air yang baik untuk hasil optimal."
                 )
             )
 
@@ -1304,13 +1304,13 @@ object DatabaseInitializer {
                     plantsId = 10,
                     name = "Varietas Delima Ruby",
                     superiority = "Buah besar dengan kulit merah cerah, rasa manis, dan kaya akan antioksidan.",
-                    lack = "Memerlukan perawatan ekstra terutama dalam pemangkasan dan pengendalian hama."
+                    weakness = "Memerlukan perawatan ekstra terutama dalam pemangkasan dan pengendalian hama."
                 ),
                 Varieties(
                     plantsId = 10,
                     name = "Varietas Delima Wonderful",
                     superiority = "Produktivitas tinggi, buah besar dengan biji sedikit, cocok untuk pasar ekspor.",
-                    lack = "Rentan terhadap penyakit seperti busuk akar dan layu bakteri."
+                    weakness = "Rentan terhadap penyakit seperti busuk akar dan layu bakteri."
                 )
             )
 
@@ -1439,13 +1439,13 @@ object DatabaseInitializer {
                     plantsId = 11,
                     name = "Varietas Pisang Cavendish",
                     superiority = "Buah besar, tahan terhadap penyakit, dan memiliki daya simpan yang baik.",
-                    lack = "Rentan terhadap penyakit layu fusarium."
+                    weakness = "Rentan terhadap penyakit layu fusarium."
                 ),
                 Varieties(
                     plantsId = 11,
                     name = "Varietas Pisang Raja Bulu",
                     superiority = "Rasa buah yang manis, adaptasi baik di daerah tropis.",
-                    lack = "Memerlukan perawatan ekstra terutama dalam pengendalian hama."
+                    weakness = "Memerlukan perawatan ekstra terutama dalam pengendalian hama."
                 )
             )
 
@@ -1564,19 +1564,19 @@ object DatabaseInitializer {
                     plantsId = 12,
                     name = "Varietas Harum Manis",
                     superiority = "Buah besar, rasa manis, dan produktivitas tinggi.",
-                    lack = "Rentan terhadap penyakit antraknosa di daerah yang lembap."
+                    weakness = "Rentan terhadap penyakit antraknosa di daerah yang lembap."
                 ),
                 Varieties(
                     plantsId = 12,
                     name = "Varietas Gedong Gincu",
                     superiority = "Tahan terhadap beberapa penyakit dan memiliki kualitas buah yang baik.",
-                    lack = "Memerlukan perawatan ekstra untuk pengendalian hama dan penyakit."
+                    weakness = "Memerlukan perawatan ekstra untuk pengendalian hama dan penyakit."
                 ),
                 Varieties(
                     plantsId = 12,
                     name = "Varietas Arumanis",
                     superiority = "Buah berukuran sedang, memiliki aroma harum, dan adaptasi baik di berbagai kondisi lahan.",
-                    lack = "Kualitas buah bisa berkurang dalam kondisi tanah yang kurang subur."
+                    weakness = "Kualitas buah bisa berkurang dalam kondisi tanah yang kurang subur."
                 )
             )
 
@@ -1695,19 +1695,19 @@ object DatabaseInitializer {
                     plantsId = 13,
                     name = "Merlot",
                     superiority = "Buah dengan kualitas anggur merah yang baik, tahan terhadap penyakit, dan adaptasi baik di berbagai iklim.",
-                    lack = "Memerlukan perhatian ekstra dalam pengendalian gulma dan penyakit."
+                    weakness = "Memerlukan perhatian ekstra dalam pengendalian gulma dan penyakit."
                 ),
                 Varieties(
                     plantsId = 13,
                     name = "Chardonnay",
                     superiority = "Buah berwarna putih dengan rasa yang lembut dan aroma harum, cocok untuk dijadikan anggur putih.",
-                    lack = "Rentan terhadap cuaca yang ekstrem dan memerlukan manajemen air yang baik."
+                    weakness = "Rentan terhadap cuaca yang ekstrem dan memerlukan manajemen air yang baik."
                 ),
                 Varieties(
                     plantsId = 13,
                     name = "Muscat",
                     superiority = "Buah dengan rasa manis dan aroma harum khas, cocok untuk dijadikan anggur meja.",
-                    lack = "Rentan terhadap serangan jamur dan hama pada kondisi kelembaban tinggi."
+                    weakness = "Rentan terhadap serangan jamur dan hama pada kondisi kelembaban tinggi."
                 )
             )
 
@@ -1809,19 +1809,19 @@ object DatabaseInitializer {
                     plantsId = 14,
                     name = "Madu",
                     superiority = "Buah dengan rasa manis dan kadar air yang tinggi, cocok untuk konsumsi segar.",
-                    lack = "Rentan terhadap penyakit layu bakteri pada kondisi tanah yang lembab."
+                    weakness = "Rentan terhadap penyakit layu bakteri pada kondisi tanah yang lembab."
                 ),
                 Varieties(
                     plantsId = 14,
                     name = "Crimson Sweet",
                     superiority = "Buah besar dengan daging merah, tahan terhadap beberapa penyakit, dan memiliki umur simpan yang baik.",
-                    lack = "Memerlukan pemupukan dan penyiraman yang konsisten untuk hasil terbaik."
+                    weakness = "Memerlukan pemupukan dan penyiraman yang konsisten untuk hasil terbaik."
                 ),
                 Varieties(
                     plantsId = 14,
                     name = "Sugar Baby",
                     superiority = "Buah kecil dengan daging merah gelap dan rasa yang manis, cocok untuk ukuran semangka mini.",
-                    lack = "Rentan terhadap serangan hama dan penyakit jika tidak dikelola dengan baik."
+                    weakness = "Rentan terhadap serangan hama dan penyakit jika tidak dikelola dengan baik."
                 )
             )
 
@@ -1925,19 +1925,19 @@ object DatabaseInitializer {
                     plantsId = 15,
                     name = "Honeydew",
                     superiority = "Buah besar dengan daging putih kehijauan, manis, dan memiliki kandungan air tinggi.",
-                    lack = "Membutuhkan kondisi tanah yang subur dan perlindungan ekstra terhadap hama seperti thrips."
+                    weakness = "Membutuhkan kondisi tanah yang subur dan perlindungan ekstra terhadap hama seperti thrips."
                 ),
                 Varieties(
                     plantsId = 15,
                     name = "Cantaloupe",
                     superiority = "Buah berdaging oranye dengan rasa manis yang khas, tahan terhadap penyakit tertentu.",
-                    lack = "Rentan terhadap kondisi lingkungan yang terlalu lembab yang dapat menyebabkan masalah penyakit."
+                    weakness = "Rentan terhadap kondisi lingkungan yang terlalu lembab yang dapat menyebabkan masalah penyakit."
                 ),
                 Varieties(
                     plantsId = 15,
                     name = "Galia",
                     superiority = "Buah berkulit hijau kekuningan dengan daging jingga dan rasa manis yang segar.",
-                    lack = "Memerlukan perawatan yang teliti terutama dalam pengendalian hama dan penyakit."
+                    weakness = "Memerlukan perawatan yang teliti terutama dalam pengendalian hama dan penyakit."
                 )
             )
 
@@ -2040,19 +2040,19 @@ object DatabaseInitializer {
                     plantsId = 16,
                     name = "Fuji",
                     superiority = "Buah besar dengan rasa manis dan renyah, cocok untuk berbagai kondisi iklim.",
-                    lack = "Memerlukan perlindungan ekstra terhadap penyakit seperti busuk buah."
+                    weakness = "Memerlukan perlindungan ekstra terhadap penyakit seperti busuk buah."
                 ),
                 Varieties(
                     plantsId = 16,
                     name = "Gala",
                     superiority = "Buah berwarna merah dan kuning dengan rasa manis dan asam yang seimbang.",
-                    lack = "Rentan terhadap penyakit seperti noda daun dan busuk akar."
+                    weakness = "Rentan terhadap penyakit seperti noda daun dan busuk akar."
                 ),
                 Varieties(
                     plantsId = 16,
                     name = "Granny Smith",
                     superiority = "Buah hijau dengan rasa asam yang segar, tahan terhadap penyakit dan hama.",
-                    lack = "Memerlukan cuaca yang lebih dingin untuk menghasilkan buah dengan warna yang terbaik."
+                    weakness = "Memerlukan cuaca yang lebih dingin untuk menghasilkan buah dengan warna yang terbaik."
                 )
             )
 
@@ -2155,19 +2155,19 @@ object DatabaseInitializer {
                     plantsId = 17,
                     name = "Jeruk Siam",
                     superiority = "Buah besar dengan kulit tebal, rasanya manis dan asam seimbang.",
-                    lack = "Rentan terhadap serangan hama kutu daun dan penyakit seperti antraknosa."
+                    weakness = "Rentan terhadap serangan hama kutu daun dan penyakit seperti antraknosa."
                 ),
                 Varieties(
                     plantsId = 17,
                     name = "Jeruk Pontianak",
                     superiority = "Buah berukuran sedang dengan kulit tipis, rasa manis dengan aroma harum.",
-                    lack = "Memerlukan perawatan ekstra terhadap penyakit layu bakteri dan penyakit busuk akar."
+                    weakness = "Memerlukan perawatan ekstra terhadap penyakit layu bakteri dan penyakit busuk akar."
                 ),
                 Varieties(
                     plantsId = 17,
                     name = "Jeruk Keprok",
                     superiority = "Buah berwarna kuning cerah, rasanya manis dengan sedikit rasa asam.",
-                    lack = "Rentan terhadap hama penghisap tanaman dan memerlukan pola irigasi yang baik."
+                    weakness = "Rentan terhadap hama penghisap tanaman dan memerlukan pola irigasi yang baik."
                 )
             )
 
@@ -2270,19 +2270,19 @@ object DatabaseInitializer {
                     plantsId = 18,
                     name = "Pepaya California",
                     superiority = "Buah besar dengan daging buah yang tebal, rasanya manis dan sedikit asam.",
-                    lack = "Rentan terhadap serangan hama kutu putih dan penyakit seperti busuk buah."
+                    weakness = "Rentan terhadap serangan hama kutu putih dan penyakit seperti busuk buah."
                 ),
                 Varieties(
                     plantsId = 18,
                     name = "Pepaya Red Lady",
                     superiority = "Buah berukuran sedang dengan kulit tipis, daging buah oranye, rasanya manis dan aromatik.",
-                    lack = "Memerlukan perawatan ekstra terhadap hama penghisap daun dan penyakit seperti antraknosa."
+                    weakness = "Memerlukan perawatan ekstra terhadap hama penghisap daun dan penyakit seperti antraknosa."
                 ),
                 Varieties(
                     plantsId = 18,
                     name = "Pepaya Thailand",
                     superiority = "Buah berukuran besar dengan kulit hijau kekuningan, daging buah jingga, rasanya manis dengan aroma harum.",
-                    lack = "Rentan terhadap hama penggerek batang dan memerlukan pemeliharaan pola irigasi yang baik."
+                    weakness = "Rentan terhadap hama penggerek batang dan memerlukan pemeliharaan pola irigasi yang baik."
                 )
             )
 
@@ -2395,19 +2395,19 @@ object DatabaseInitializer {
                     plantsId = 19,
                     name = "Varietas Tegal",
                     superiority = "Hasil buah kelapa cukup tinggi, tahan terhadap hama penyakit tertentu.",
-                    lack = "Memerlukan perawatan ekstra terutama dalam pemupukan dan pengairan."
+                    weakness = "Memerlukan perawatan ekstra terutama dalam pemupukan dan pengairan."
                 ),
                 Varieties(
                     plantsId = 19,
                     name = "Varietas Malayan Dwarf",
                     superiority = "Buah kelapa berukuran kecil, cepat berbuah, cocok untuk lahan terbatas.",
-                    lack = "Memerlukan perlindungan ekstra terhadap hama dan penyakit."
+                    weakness = "Memerlukan perlindungan ekstra terhadap hama dan penyakit."
                 ),
                 Varieties(
                     plantsId = 19,
                     name = "Varietas Sri Lanka Green Dwarf",
                     superiority = "Tahan terhadap hama dan penyakit, adaptsi baik di berbagai kondisi lahan.",
-                    lack = "Pertumbuhan awal yang lambat, membutuhkan perawatan lebih intensif."
+                    weakness = "Pertumbuhan awal yang lambat, membutuhkan perawatan lebih intensif."
                 )
             )
 
@@ -2519,13 +2519,13 @@ object DatabaseInitializer {
                     plantsId = 20,
                     name = "Varietas Bt Cotton",
                     superiority = "Tahan terhadap serangan hama ulat kapas, hasil panen tinggi, dan penggunaan pestisida yang lebih sedikit.",
-                    lack = "Memerlukan manajemen yang baik terhadap resistensi hama."
+                    weakness = "Memerlukan manajemen yang baik terhadap resistensi hama."
                 ),
                 Varieties(
                     plantsId = 20,
                     name = "Varietas Lembaga",
                     superiority = "Tahan terhadap cuaca ekstrim, tingkat hasil yang tinggi.",
-                    lack = "Rentan terhadap serangan hama."
+                    weakness = "Rentan terhadap serangan hama."
                 )
             )
 
@@ -2637,13 +2637,13 @@ object DatabaseInitializer {
                     plantsId = 21,
                     name = "Varietas Rami ABC",
                     superiority = "Tinggi hasil panen serat, adaptasi baik di berbagai jenis tanah.",
-                    lack = "Rentan terhadap serangan hama tikus."
+                    weakness = "Rentan terhadap serangan hama tikus."
                 ),
                 Varieties(
                     plantsId = 21,
                     name = "Varietas Rami XYZ",
                     superiority = "Tahan terhadap penyakit dan hama umum, cocok untuk lahan dengan drainase baik.",
-                    lack = "Memerlukan manajemen air yang hati-hati."
+                    weakness = "Memerlukan manajemen air yang hati-hati."
                 )
             )
 
@@ -2755,19 +2755,19 @@ object DatabaseInitializer {
                     plantsId = 22,
                     name = "Varietas Arabika",
                     superiority = "Memiliki cita rasa yang superior, cocok untuk kopi spesialti.",
-                    lack = "Rentan terhadap penyakit karat daun."
+                    weakness = "Rentan terhadap penyakit karat daun."
                 ),
                 Varieties(
                     plantsId = 22,
                     name = "Varietas Robusta",
                     superiority = "Tahan terhadap hama dan penyakit, hasil panen tinggi.",
-                    lack = "Kualitas rasa yang biasa dibandingkan dengan Arabika."
+                    weakness = "Kualitas rasa yang biasa dibandingkan dengan Arabika."
                 ),
                 Varieties(
                     plantsId = 22,
                     name = "Varietas Liberika",
                     superiority = "Tahan terhadap kondisi lingkungan yang ekstrem.",
-                    lack = "Kurang populer dibandingkan dengan Arabika dan Robusta."
+                    weakness = "Kurang populer dibandingkan dengan Arabika dan Robusta."
                 )
             )
 

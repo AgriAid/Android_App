@@ -1,5 +1,6 @@
 package com.ryan.agriaid.ui.screen.profile
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -42,19 +44,26 @@ fun ProfileScreen(
     isLogin: Boolean,
     onClick : () -> Unit
 ) {
+    LocalContext.current
     val dataMenuItems = listOf(
         MenuData(
             icon = R.drawable.plant,
-            title = "Rekomendasi Tanaman",
-            onClick = {}),
+            title = "Scan Penyakit Tanaman",
+            onClick = { context ->
+                Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            }),
         MenuData(
             icon = R.drawable.notification,
             title = "Pemberitahuan",
-            onClick = {}),
+            onClick = { context ->
+                Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            }),
         MenuData(
             icon = R.drawable.support,
             title = "Bantuan",
-            onClick = {}),
+            onClick = { context ->
+                Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            }),
     )
 
     Column(

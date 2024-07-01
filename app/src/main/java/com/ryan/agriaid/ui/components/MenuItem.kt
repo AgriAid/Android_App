@@ -1,6 +1,6 @@
 package com.ryan.agriaid.ui.components
 
-import androidx.compose.foundation.background
+import android.content.Context
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,8 +16,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -27,13 +27,14 @@ import com.ryan.agriaid.R
 fun MenuItem(
     icon: Int,
     title: String,
-    onClick: () -> Unit,
+    onClick: (context: Context) -> Unit,
 ) {
+    val context = LocalContext.current
     ElevatedButton(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(15.dp),
         elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
-        onClick = onClick
+        onClick = { onClick(context) }
     ) {
         Row(
             modifier = Modifier
@@ -70,8 +71,8 @@ fun MenuItemPreview() {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
-        MenuItem(icon = R.drawable.profile, title = "Pemberitahuan", onClick = {})
-        MenuItem(icon = R.drawable.profile, title = "Login Ke akun", onClick = {})
-        MenuItem(icon = R.drawable.profile, title = "Rekomendasi tanaman", onClick = {})
+        MenuItem(icon = R.drawable.profile, title = "Pemberitahuan") {}
+        MenuItem(icon = R.drawable.profile, title = "Login Ke akun") {}
+        MenuItem(icon = R.drawable.profile, title = "Rekomendasi tanaman") {}
     }
 }

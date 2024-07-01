@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import androidx.room.Relation
 
 data class PlantDetails(
-    @Embedded val plant: Plants, // Kolom-kolom dari tabel Plants
+    @Embedded val plant: Plants,
     @Relation(parentColumn = "id", entityColumn = "plantsId")
     val landPreparations: List<LandPreparations>,
     @Relation(parentColumn = "id", entityColumn = "plantsId")

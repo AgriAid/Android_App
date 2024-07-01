@@ -21,7 +21,6 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
     val weatherData: LiveData<Weather> = _weather
 
     fun getWeatherForecast(lat: String, lon: String, lang: String) {
-        Log.e("test", "masuk ke get weather forecast")
         viewModelScope.launch {
             val response: Response<WeatherForecastResponse> =
                 weatherRepository.getWeatherForecast(lat, lon, lang)
@@ -29,12 +28,11 @@ class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewM
                 val weatherResponse: WeatherForecastResponse? = response.body()
                 weatherResponse?.let {
                     val weatherList = mappingWeatherList(it)
-                    Log.e("test", "hasil data yang di minta ${weatherList[0]}")
                     saveWeatherData(weatherList)
                     _weather.postValue(weatherList[0])
                 }
             } else {
-                Log.e("test", "error ${response.message()}")
+                Log.e("test", "weather response error : ${response.message()}")
             }
         }
     }
