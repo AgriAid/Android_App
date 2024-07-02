@@ -13,7 +13,7 @@ import com.ryan.agriaid.data.local.user.UserRepository
 import com.ryan.agriaid.data.local.user.UserViewModel
 import com.ryan.agriaid.data.remote.WeatherRepository
 import com.ryan.agriaid.data.remote.WeatherViewModel
-import com.ryan.agriaid.ui.screen.prediction.ClassificationViewModel
+import com.ryan.agriaid.ui.screen.recomendation.ClassificationViewModel
 
 class ViewModelFactory(
     private val articleRepository: ArticleRepository,

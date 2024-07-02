@@ -11,4 +11,8 @@ class PlantViewModel(private val plantRepository: PlantRepository) : ViewModel()
     suspend fun getPlantsByName(names: List<String>): List<Plants>  {
         return plantRepository.getPlantsByName(names)
     }
+
+    suspend fun getAllPlants(): List<Plants> {
+        return plantRepository.getAllPlants()
+    }
 }

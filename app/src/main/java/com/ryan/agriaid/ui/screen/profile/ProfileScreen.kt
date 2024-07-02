@@ -33,24 +33,27 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.ryan.agriaid.R
 import com.ryan.agriaid.data.local.user.User
+import com.ryan.agriaid.navigation.NavRoutes
 import com.ryan.agriaid.ui.components.MenuItem
 
 @Composable
 fun ProfileScreen(
+    navController: NavController,
     user: User?,
     isLogin: Boolean,
-    onClick : () -> Unit
+    onClick: () -> Unit,
 ) {
     LocalContext.current
     val dataMenuItems = listOf(
         MenuData(
             icon = R.drawable.plant,
-            title = "Scan Penyakit Tanaman",
-            onClick = { context ->
-                Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            title = "Daftar Tanaman",
+            onClick = {
+                navController.navigate(NavRoutes.PlantsList)
             }),
         MenuData(
             icon = R.drawable.notification,
@@ -114,7 +117,11 @@ fun ProfileScreen(
 }
 
 @Composable
-fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean, onClick: () -> Unit = {}) {
+fun MenuList(
+    dataMenuItems: List<MenuData>,
+    isLogin: Boolean,
+    onClick: () -> Unit,
+) {
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -139,7 +146,8 @@ fun MenuList(dataMenuItems: List<MenuData>, isLogin: Boolean, onClick: () -> Uni
                 ElevatedButton(
                     shape = RoundedCornerShape(15.dp),
                     elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
-                    onClick = onClick)
+                    onClick = onClick
+                )
                 {
                     Text(text = if (isLogin) "Keluar" else "Masuk")
                     Spacer(modifier = Modifier.width(10.dp))
