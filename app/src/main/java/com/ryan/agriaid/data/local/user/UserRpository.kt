@@ -1,6 +1,5 @@
 package com.ryan.agriaid.data.local.user
 
-import com.ryan.agriaid.data.local.UserPreferences
 import kotlinx.coroutines.flow.StateFlow
 
 class UserRepository(private val userPreferences: UserPreferences) {

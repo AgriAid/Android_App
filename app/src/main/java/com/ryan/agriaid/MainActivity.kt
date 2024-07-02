@@ -1,6 +1,7 @@
 package com.ryan.agriaid
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -38,8 +39,10 @@ import com.ryan.agriaid.ui.screen.recomendation.PredictScreen
 import com.ryan.agriaid.ui.screen.profile.ProfileScreen
 import com.ryan.agriaid.ui.screen.result.PlantDetailScreen
 import com.ryan.agriaid.ui.screen.result.ResultScreen
+import com.ryan.agriaid.ui.screen.termsandconditions.TermsAndConditionsScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
 import com.ryan.agriaid.utility.NetworkUtils
+import com.ryan.agriaid.utility.PreferencesHelper
 import com.ryan.agriaid.utility.showToast
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +73,9 @@ fun MainScreen() {
     val user by userViewModel.userFlow.collectAsState(initial = null)
     val isLogin = user != null
 
+    val preferencesHelper = PreferencesHelper(context)
+    val termsAccepted = preferencesHelper.isTermsAccepted()
+
     val isOnline = NetworkUtils.isNetworkAvailable(context)
 
     LaunchedEffect(isOnline) {
@@ -79,7 +85,7 @@ fun MainScreen() {
     }
     Scaffold(
         topBar = {
-            if (currentRoute !in screensWithBottomNav) {
+            if (currentRoute !in screensWithBottomNav && currentRoute != NavRoutes.TermsAndConditions) {
                 TopAppBar(
                     colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                         containerColor = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
@@ -120,8 +126,21 @@ fun MainScreen() {
     ) {
         NavHost(
             navController = navController,
-            startDestination = NavRoutes.Home
+            startDestination = if (!termsAccepted) NavRoutes.TermsAndConditions else NavRoutes.Home
         ) {
+            composable(NavRoutes.TermsAndConditions) {
+                TermsAndConditionsScreen(
+                    onAccept = {
+                        preferencesHelper.setTermsAccepted(true)
+                        navController.navigate(NavRoutes.Home) {
+                            popUpTo(NavRoutes.TermsAndConditions) { inclusive = true }
+                        }
+                    },
+                    onDecline = {
+                        (context as? Activity)?.finish()
+                    }
+                )
+            }
             composable(NavRoutes.Home) {
                 HomeScreen(
                     navController,

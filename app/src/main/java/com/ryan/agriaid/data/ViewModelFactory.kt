@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ryan.agriaid.data.local.clasification.TFLiteModelInterpreter
-import com.ryan.agriaid.data.local.UserPreferences
+import com.ryan.agriaid.data.local.user.UserPreferences
 import com.ryan.agriaid.data.local.article.ArticleRepository
 import com.ryan.agriaid.data.local.article.ArticleViewModel
 import com.ryan.agriaid.data.local.plants.PlantRepository
