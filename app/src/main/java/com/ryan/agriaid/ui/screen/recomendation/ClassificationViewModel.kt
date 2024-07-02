@@ -1,4 +1,4 @@
-package com.ryan.agriaid.ui.screen.prediction
+package com.ryan.agriaid.ui.screen.recomendation
 
 import androidx.lifecycle.ViewModel
 import com.ryan.agriaid.data.local.clasification.TFLiteModelInterpreter

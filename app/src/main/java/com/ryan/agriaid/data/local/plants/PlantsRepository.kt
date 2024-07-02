@@ -19,4 +19,8 @@ class PlantRepository(context: Context) {
         }
         return plants
     }
+
+    suspend fun getAllPlants(): List<Plants> {
+        return plantDao.getAllPlants()
+    }
 }

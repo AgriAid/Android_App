@@ -33,7 +33,8 @@ import com.ryan.agriaid.navigation.BottomNavigationBar
 import com.ryan.agriaid.navigation.NavRoutes
 import com.ryan.agriaid.ui.screen.article.ArticleScreen
 import com.ryan.agriaid.ui.screen.home.HomeScreen
-import com.ryan.agriaid.ui.screen.prediction.PredictScreen
+import com.ryan.agriaid.ui.screen.plantslist.PlantsListScreen
+import com.ryan.agriaid.ui.screen.recomendation.PredictScreen
 import com.ryan.agriaid.ui.screen.profile.ProfileScreen
 import com.ryan.agriaid.ui.screen.result.PlantDetailScreen
 import com.ryan.agriaid.ui.screen.result.ResultScreen
@@ -91,6 +92,7 @@ fun MainScreen() {
                                 "artikelDetail/{artikelId}" -> "Detail Artikel"
                                 NavRoutes.Predict -> "Masukan Data"
                                 "${NavRoutes.Result}/{results}" -> "Rekomendasi Tanaman"
+                                NavRoutes.PlantsList -> "Daftar Tanaman Tersedia"
                                 else -> ""
                             }
                         )
@@ -129,10 +131,14 @@ fun MainScreen() {
             composable(NavRoutes.Predict) {
                 PredictScreen(navController)
             }
+            composable(NavRoutes.PlantsList) {
+                PlantsListScreen(navController = navController)
+            }
             composable(NavRoutes.Profile) {
                 ProfileScreen(
                     user = user,
                     isLogin = isLogin,
+                    navController = navController,
                     onClick = {
                         if (user != null) {
                             userViewModel.clearUser()
@@ -156,10 +162,8 @@ fun MainScreen() {
                 val results = backStackEntry.arguments?.getString("results")
                 if (results != null) {
                     ResultScreen(
+                        navController = navController,
                         results = results.split(","),
-                        navigateToPlantDetail = { plantId ->
-                            navController.navigate("plantDetail/$plantId")
-                        }
                     )
                 } else {
                     // Handle case where results are not available
@@ -168,10 +172,10 @@ fun MainScreen() {
             composable("artikelDetail/{artikelId}") { backStackEntry ->
                 ArticleScreen(backStackEntry)
             }
-            composable("plantDetail/{plantId}") { backStackEntry ->
-                val plantName = backStackEntry.arguments?.getString("plantId")
-                if (plantName != null) {
-                    PlantDetailScreen(plantName)
+            composable(NavRoutes.PlantDetail) { backStackEntry ->
+                val plantId = backStackEntry.arguments?.getString("plantId")
+                if (plantId != null) {
+                    PlantDetailScreen(plantId)
                 }
             }
         }

@@ -1,4 +1,4 @@
-package com.ryan.agriaid.ui.screen.prediction
+package com.ryan.agriaid.ui.screen.recomendation
 
 import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
