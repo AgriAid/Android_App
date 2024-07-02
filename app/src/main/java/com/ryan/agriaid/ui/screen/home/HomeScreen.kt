@@ -64,7 +64,6 @@ import com.ryan.agriaid.ui.components.CardInfoData
 import com.ryan.agriaid.utility.NetworkUtils
 import com.ryan.agriaid.utility.TimeHelper
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -89,12 +88,6 @@ fun HomeScreen(
     var weatherData by remember { mutableStateOf<Weather?>(null) }
     var rainfallData by remember { mutableStateOf(0.0) }
 
-    var isConnected by remember { mutableStateOf(false) }
-    var isVisible by remember { mutableStateOf(true) }
-    val backgroundColor = if (isConnected) Color.Green else Color.Red
-    val message = if (isConnected) "Anda sedang Online!!" else "Anda sedang Offline!! beberapa fungsi mungkin dibatasi"
-
-
     RequestPermission { granted ->
         if (granted) {
             isPermissionGranted = true
@@ -107,7 +100,7 @@ fun HomeScreen(
     }
 
     LaunchedEffect(location) {
-        isConnected = NetworkUtils.isNetworkAvailable(context)
+        val isConnected = NetworkUtils.isNetworkAvailable(context)
 
         if (isConnected && location != null) {
             location?.let { loc ->
@@ -127,9 +120,6 @@ fun HomeScreen(
         rainfallData = withContext(Dispatchers.IO) {
             weatherViewModel.calculateTotalRainfall()
         }
-
-        delay(5000)
-        isVisible = false
     }
 
     weatherViewModel.weatherData.observeAsState().value?.let {
@@ -162,9 +152,6 @@ fun HomeScreen(
             cityName = weatherData?.city ?: "tidak ada data",
             temp = weatherData?.temp ?: 0.0,
             weatherCode = weatherData?.code,
-            isVisible = isVisible,
-            backgroundColor = backgroundColor,
-            message = message
 
         )
         BannerSection(
@@ -182,10 +169,7 @@ fun GreetingSection(
     imageUrl: Comparable<*>,
     cityName: String = "tidak ada data",
     temp: Double = 0.0,
-    weatherCode: Int?,
-    isVisible: Boolean,
-    backgroundColor: Color,
-    message: String
+    weatherCode: Int?
 ) {
     val gradientStart = colorResource(R.color.white)
     val gradientEnd = colorResource(R.color.gradientEnd)
@@ -211,21 +195,6 @@ fun GreetingSection(
                     shape = RoundedCornerShape(bottomStart = 15.dp, bottomEnd = 15.dp)
                 )
         ) {
-            if (isVisible) {
-                Box(
-                    modifier = Modifier
-                        .height(20.dp)
-                        .background(color = backgroundColor)
-                ) {
-                    Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 20.dp),
-                        fontSize = MaterialTheme.typography.bodySmall.fontSize,
-                        text = message
-                    )
-                }
-            }
             Row(
                 modifier = Modifier
                     .fillMaxSize()
