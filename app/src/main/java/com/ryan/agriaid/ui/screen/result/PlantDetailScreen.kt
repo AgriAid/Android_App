@@ -30,6 +30,7 @@ import coil.compose.AsyncImage
 import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.local.plants.PlantDetails
 import com.ryan.agriaid.data.local.plants.PlantViewModel
+import com.ryan.agriaid.ui.components.SectionTitle
 import com.ryan.agriaid.utility.Capitalize.toTitleCase
 
 @Composable
@@ -648,13 +649,4 @@ fun PlantDetailContent(plantDetails: PlantDetails) {
             Spacer(modifier = Modifier.height(5.dp))
         }
     }
-}
-
-@Composable
-fun SectionTitle(title: String) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.titleMedium,
-        modifier = Modifier.padding(vertical = 8.dp)
-    )
 }

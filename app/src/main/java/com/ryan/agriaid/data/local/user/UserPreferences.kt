@@ -1,9 +1,7 @@
-package com.ryan.agriaid.data.local
+package com.ryan.agriaid.data.local.user
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.ryan.agriaid.data.local.user.User
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

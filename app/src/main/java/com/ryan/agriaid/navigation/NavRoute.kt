@@ -1,6 +1,7 @@
 package com.ryan.agriaid.navigation
 
 object NavRoutes {
+    const val TermsAndConditions = "terms_and_conditions"
     const val Home = "home"
     const val Predict = "predict"
     const val Profile = "profile"
