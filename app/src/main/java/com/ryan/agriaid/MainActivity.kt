@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -37,6 +38,8 @@ import com.ryan.agriaid.ui.screen.profile.ProfileScreen
 import com.ryan.agriaid.ui.screen.result.PlantDetailScreen
 import com.ryan.agriaid.ui.screen.result.ResultScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
+import com.ryan.agriaid.utility.NetworkUtils
+import com.ryan.agriaid.utility.showToast
 
 class MainActivity : ComponentActivity() {
     @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -66,6 +69,13 @@ fun MainScreen() {
     val user by userViewModel.userFlow.collectAsState(initial = null)
     val isLogin = user != null
 
+    val isOnline = NetworkUtils.isNetworkAvailable(context)
+
+    LaunchedEffect(isOnline) {
+        if (!isOnline) {
+            showToast(context, "Anda sedang luring, beberapa fungsi tidak tersedia")
+        }
+    }
     Scaffold(
         topBar = {
             if (currentRoute !in screensWithBottomNav) {
