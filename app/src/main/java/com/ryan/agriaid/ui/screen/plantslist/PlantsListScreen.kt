@@ -72,16 +72,15 @@ fun PlantsListScreen(
                     CustomCard(
                         label = plant.name,
                         description = plant.description,
-                        imageUrl = plant.imgUrl,
-                        onClick = {
-                            navController.navigate(
-                                NavRoutes.PlantDetail.replace(
-                                    "{plantId}",
-                                    plant.name
-                                )
+                        imageUrl = plant.imgUrl
+                    ) {
+                        navController.navigate(
+                            NavRoutes.PlantDetail.replace(
+                                "{plantId}",
+                                plant.name
                             )
-                        }
-                    )
+                        )
+                    }
                 }
             }
         }

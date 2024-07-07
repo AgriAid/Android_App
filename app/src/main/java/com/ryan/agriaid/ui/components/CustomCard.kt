@@ -1,8 +1,10 @@
 package com.ryan.agriaid.ui.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
@@ -23,6 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -37,7 +43,8 @@ fun CustomCard(
     label: String,
     description: String,
     imageUrl: Int,
-    onClick: () -> Unit
+    ikt: Int? = null,
+    onClick: () -> Unit,
 ) {
     ElevatedCard(
         elevation = CardDefaults.elevatedCardElevation(3.dp),
@@ -56,19 +63,34 @@ fun CustomCard(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.weight(1f)
             ) {
-                AsyncImage(
-                    model = imageUrl,
-                    contentDescription = "Image Profile",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier
-                        .size(100.dp)
-                        .clip(CircleShape)
-                        .border(
-                            width = 1.dp,
-                            color = MaterialTheme.colorScheme.primary,
-                            shape = CircleShape
-                        )
-                )
+                Box(
+                    modifier = Modifier.size(100.dp)
+                ) {
+                    AsyncImage(
+                        model = imageUrl,
+                        contentDescription = "Plant Image",
+                        contentScale = ContentScale.Crop,
+                        modifier = Modifier
+                            .size(100.dp)
+                            .clip(CircleShape)
+                            .border(
+                                width = 1.dp,
+                                color = if (ikt != null) Color.Red else MaterialTheme.colorScheme.primary,
+                                shape = CircleShape
+                            )
+                    )
+                    if (ikt != null) {
+                        Canvas(modifier = Modifier.matchParentSize()) {
+                            drawArc(
+                                color = Color(0xFF408278),
+                                startAngle = -90f,
+                                sweepAngle = (ikt / 100f) * 360f,
+                                useCenter = false,
+                                style = Stroke(width = 2.dp.toPx(), cap = StrokeCap.Round)
+                            )
+                        }
+                    }
+                }
                 Spacer(modifier = Modifier.size(16.dp))
                 Column(
                     modifier = Modifier.weight(1f)
@@ -86,9 +108,30 @@ fun CustomCard(
                         text = description,
                         style = MaterialTheme.typography.bodySmall,
                         textAlign = TextAlign.Start,
-                        maxLines = 4,
+                        maxLines = 3,
                         overflow = TextOverflow.Ellipsis
                     )
+                    if (ikt != null) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Text(
+                                text = "IKT: ",
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    color = MaterialTheme.colorScheme.secondary,
+                                    fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                                    fontSize = MaterialTheme.typography.titleMedium.fontSize
+                                )
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                text = "$ikt%",
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    color = MaterialTheme.colorScheme.secondary
+                                ),
+                            )
+                        }
+                    }
                 }
             }
             Spacer(modifier = Modifier.size(6.dp))
@@ -113,8 +156,7 @@ fun CustomCardPreview() {
         CustomCard(
             label = "Jagung",
             description = "Jagung merupakan tanaman yang ditanam sebagai Jagung merupakan tanaman yang ditanam sebagai Jagung merupakan tanaman yang ditanam sebagai",
-            imageUrl = R.drawable.jagung,
-            onClick = {}
-        )
+            imageUrl = R.drawable.jagung
+        ) {}
     }
 }
