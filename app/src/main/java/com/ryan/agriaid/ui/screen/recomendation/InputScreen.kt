@@ -42,6 +42,8 @@ import com.ryan.agriaid.data.ViewModelFactory
 import com.ryan.agriaid.data.remote.WeatherViewModel
 import com.ryan.agriaid.navigation.NavRoutes
 import com.ryan.agriaid.ui.components.CustomOutlinedTextField
+import com.ryan.agriaid.utility.checkForEmptyFields
+import com.ryan.agriaid.utility.validateAndResetInputs
 
 @Composable
 fun PredictScreen(navController: NavController) {
@@ -219,16 +221,50 @@ fun PredictScreen(navController: NavController) {
                     ),
                     elevation = ButtonDefaults.buttonElevation(3.dp),
                     onClick = {
-                        if (nitrogen.isEmpty() || fosfor.isEmpty() || kalium.isEmpty() || avgTemp.isEmpty() || avgHumidity.isEmpty() || ph.isEmpty() || avgRainfall.isEmpty()) {
-                            showValidation = true
-                            Toast.makeText(
-                                context,
-                                "Please fill in all the fields",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                            return@Button
-                        }
+                        if (checkForEmptyFields(
+                                nitrogen = nitrogen,
+                                fosfor = fosfor,
+                                kalium = kalium,
+                                ph = ph,
+                                avgTemp = avgTemp,
+                                avgHumidity = avgHumidity,
+                                avgRainfall = avgRainfall,
+                                onEmptyFields = {
+                                    showValidation = true
+                                    Toast.makeText(
+                                        context,
+                                        "Please fill in all the fields",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            )
+                        ) {
+                            val newValues = validateAndResetInputs(
+                                nitrogen = nitrogen,
+                                fosfor = fosfor,
+                                kalium = kalium,
+                                ph = ph,
+                                avgTemp = avgTemp,
+                                avgHumidity = avgHumidity,
+                                avgRainfall = avgRainfall,
+                                onInvalid = {
+                                    showValidation = true
+                                    Toast.makeText(
+                                        context,
+                                        "Some inputs are out of range, please correct them.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            )
 
+                            nitrogen = newValues[0]
+                            fosfor = newValues[1]
+                            kalium = newValues[2]
+                            ph = newValues[3]
+                            avgTemp = newValues[4]
+                            avgHumidity = newValues[5]
+                            avgRainfall = newValues[6]
+                        }
                         try {
                             val inputs = arrayOf(
                                 floatArrayOf(

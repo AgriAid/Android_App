@@ -13,13 +13,11 @@ class ClassificationViewModel(
         "kelapa", "kapas", "rami", "kopi"
     )
 
-    fun performInference(inputs: Array<FloatArray>): List<String> {
+    fun performInference(inputs: Array<FloatArray>): List<Pair<String, Float>> {
         val outputProbabilities = tfliteModelInterpreter.classify(inputs)
-        val top4Indices = outputProbabilities
-            .mapIndexed { index, probability -> index to probability }
+        return outputProbabilities
+            .mapIndexed { index, probability -> labels[index] to probability }
             .sortedByDescending { it.second }
             .take(4)
-            .map { it.first }
-        return top4Indices.map { labels[it] }
     }
 }

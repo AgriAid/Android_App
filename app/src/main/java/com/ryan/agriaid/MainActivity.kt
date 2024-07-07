@@ -43,6 +43,7 @@ import com.ryan.agriaid.ui.screen.termsandconditions.TermsAndConditionsScreen
 import com.ryan.agriaid.ui.theme.AgriAidTheme
 import com.ryan.agriaid.utility.NetworkUtils
 import com.ryan.agriaid.utility.PreferencesHelper
+import com.ryan.agriaid.utility.parseResultsString
 import com.ryan.agriaid.utility.showToast
 
 class MainActivity : ComponentActivity() {
@@ -180,14 +181,16 @@ fun MainScreen() {
             ) { backStackEntry ->
                 val results = backStackEntry.arguments?.getString("results")
                 if (results != null) {
+                    val parsedResults = parseResultsString(results)
                     ResultScreen(
                         navController = navController,
-                        results = results.split(","),
+                        results = parsedResults,
                     )
                 } else {
                     // Handle case where results are not available
                 }
             }
+
             composable("artikelDetail/{artikelId}") { backStackEntry ->
                 ArticleScreen(backStackEntry)
             }
