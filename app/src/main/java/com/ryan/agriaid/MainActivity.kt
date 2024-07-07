@@ -33,6 +33,7 @@ import com.ryan.agriaid.data.local.user.UserViewModel
 import com.ryan.agriaid.navigation.BottomNavigationBar
 import com.ryan.agriaid.navigation.NavRoutes
 import com.ryan.agriaid.ui.screen.article.ArticleScreen
+import com.ryan.agriaid.ui.screen.guide.GuideScreen
 import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.ui.screen.plantslist.PlantsListScreen
 import com.ryan.agriaid.ui.screen.recomendation.PredictScreen
@@ -196,6 +197,9 @@ fun MainScreen() {
                 if (plantId != null) {
                     PlantDetailScreen(plantId)
                 }
+            }
+            composable(NavRoutes.Guide) {
+                GuideScreen()
             }
         }
     }

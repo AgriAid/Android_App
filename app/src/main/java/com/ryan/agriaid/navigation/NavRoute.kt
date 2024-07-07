@@ -8,4 +8,5 @@ object NavRoutes {
     const val Result = "result"
     const val PlantsList = "plants_list_screen"
     const val PlantDetail = "plant_detail/{plantId}"
+    const val Guide = "guide"
 }

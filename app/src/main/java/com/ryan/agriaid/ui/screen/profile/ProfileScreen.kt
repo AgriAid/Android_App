@@ -56,6 +56,12 @@ fun ProfileScreen(
                 navController.navigate(NavRoutes.PlantsList)
             }),
         MenuData(
+            icon = R.drawable.guide,
+            title = "Panduan",
+            onClick = {
+                navController.navigate(NavRoutes.Guide)
+            }),
+        MenuData(
             icon = R.drawable.notification,
             title = "Pemberitahuan",
             onClick = { context ->
