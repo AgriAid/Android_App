@@ -25,7 +25,7 @@ import com.ryan.agriaid.R
 
 @Composable
 fun MenuItem(
-    icon: Int,
+    icon: Int? = null,
     title: String,
     onClick: (context: Context) -> Unit,
 ) {
@@ -43,11 +43,13 @@ fun MenuItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            Icon(
-                tint = MaterialTheme.colorScheme.primary,
-                imageVector = ImageVector
-                    .vectorResource(id = icon), contentDescription = "icon"
-            )
+            if (icon != null) {
+                Icon(
+                    tint = MaterialTheme.colorScheme.primary,
+                    imageVector = ImageVector
+                        .vectorResource(id = icon), contentDescription = "icon"
+                )
+            }
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.7f),
