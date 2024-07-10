@@ -25,8 +25,9 @@ import com.ryan.agriaid.R
 
 @Composable
 fun MenuItem(
-    icon: Int? = null,
+    icon: Int,
     title: String,
+    isDevelop: Boolean = false,
     onClick: (context: Context) -> Unit,
 ) {
     val context = LocalContext.current
@@ -43,13 +44,11 @@ fun MenuItem(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            if (icon != null) {
-                Icon(
-                    tint = MaterialTheme.colorScheme.primary,
-                    imageVector = ImageVector
-                        .vectorResource(id = icon), contentDescription = "icon"
-                )
-            }
+            Icon(
+                tint = MaterialTheme.colorScheme.primary,
+                imageVector = ImageVector
+                    .vectorResource(id = icon), contentDescription = "icon"
+            )
             Text(
                 modifier = Modifier
                     .fillMaxWidth(0.7f),
@@ -61,7 +60,8 @@ fun MenuItem(
             Icon(
                 tint = MaterialTheme.colorScheme.primary,
                 imageVector = ImageVector
-                    .vectorResource(id = R.drawable.arrow_right), contentDescription = "arrow"
+                    .vectorResource(id = if (isDevelop) R.drawable.develop else R.drawable.arrow_right),
+                contentDescription = "icon"
             )
         }
     }

@@ -8,6 +8,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.ryan.agriaid.data.local.article.Article
 import com.ryan.agriaid.data.local.article.ArticleDao
 import com.ryan.agriaid.data.local.article.ArticleDetail
+import com.ryan.agriaid.data.local.plants.AvgSoil
 import com.ryan.agriaid.data.local.plants.Diseases
 import com.ryan.agriaid.data.local.plants.Fertilization
 import com.ryan.agriaid.data.local.plants.LandPreparations
@@ -25,7 +26,7 @@ import com.ryan.agriaid.data.local.weather.WeatherDao
     entities = [
         Article::class, ArticleDetail::class, Weather::class, Diseases::class, Fertilization::class,
         LandPreparations::class, Nurseries::class, Pests::class, Plantings::class, Plants::class,
-        Varieties::class, Weeds::class],
+        Varieties::class, Weeds::class, AvgSoil::class],
     version = 1,
     exportSchema = false
 )

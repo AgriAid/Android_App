@@ -20,5 +20,7 @@ data class PlantDetails(
     @Relation(parentColumn = "id", entityColumn = "plantsId")
     val diseases: List<Diseases>,
     @Relation(parentColumn = "id", entityColumn = "plantsId")
-    val weeds: List<Weeds>
+    val weeds: List<Weeds>,
+    @Relation(parentColumn = "id", entityColumn = "plantsId")
+    val avgSoil: List<AvgSoil>
 )

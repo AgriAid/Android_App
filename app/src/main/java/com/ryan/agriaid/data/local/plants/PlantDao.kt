@@ -2,6 +2,7 @@ package com.ryan.agriaid.data.local.plants
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 
@@ -20,7 +21,6 @@ interface PlantDao {
 
     @Insert
     suspend fun insertAllPlants(plants: List<Plants>)
-
 
     @Insert
     suspend fun insertLandPreparations(landPreparations: LandPreparations)
@@ -45,4 +45,7 @@ interface PlantDao {
 
     @Insert
     suspend fun insertDiseases(diseases: List<Diseases>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAvgSoils(avgSoils: List<AvgSoil>)
 }

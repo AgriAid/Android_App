@@ -1,6 +1,7 @@
 package com.ryan.agriaid.ui.screen.termsandconditions
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -19,14 +20,23 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.delay
 import com.ryan.agriaid.ui.components.SectionTitle
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TermsAndConditionsScreen(onAccept: () -> Unit, onDecline: () -> Unit) {
+fun TermsAndConditionsScreen(
+    onAccept: () -> Unit,
+    onDecline: () -> Unit,
+) {
     val terms = listOf(
         "1. Pendahuluan" to "Selamat datang di aplikasi kami. Syarat dan Ketentuan ini menguraikan aturan dan ketentuan untuk penggunaan aplikasi kami yang mengakses internet dan menggunakan GPS. Dengan menggunakan aplikasi ini, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini.",
         "2. Penerimaan Syarat" to "Dengan mengakses atau menggunakan aplikasi kami, Anda setuju untuk terikat oleh Syarat dan Ketentuan ini.",
@@ -39,67 +49,95 @@ fun TermsAndConditionsScreen(onAccept: () -> Unit, onDecline: () -> Unit) {
         "9. Informasi Kontak" to "Jika Anda memiliki pertanyaan atau komentar tentang Syarat dan Ketentuan ini, silakan hubungi kami melalui email di riyandotianto2@gmail.com."
     )
 
+    val isLoading = remember { mutableStateOf(false) }
+
+    LaunchedEffect(isLoading.value) {
+        if (isLoading.value) {
+            delay(1000)
+            onAccept()
+        }
+    }
     Scaffold(
         topBar = {
-            TopAppBar(
-                title = { Text("Syarat dan Ketentuan") }
-            )
+            if (!isLoading.value) {
+                TopAppBar(
+                    title = { Text("Syarat dan Ketentuan") }
+                )
+            }
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(16.dp)
-        ) {
-            LazyColumn(
-                modifier = Modifier.weight(1f)
+        if (!isLoading.value) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(16.dp)
             ) {
-                items(terms) { (title, content) ->
-                    SectionTitle(
-                        title = title
-                    )
-                    Text(
-                        text = content,
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-                }
-            }
-
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                ElevatedButton(
-                    shape = RoundedCornerShape(15.dp),
-                    elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
-                    onClick = onDecline
+                LazyColumn(
+                    modifier = Modifier.weight(1f)
                 ) {
-                    Text(
-                        text = "Tolak",
-                        fontSize = MaterialTheme.typography.bodyMedium.fontSize
-                    )
-                }
-
-                ElevatedButton(
-                    colors = ButtonDefaults.elevatedButtonColors(
-                        containerColor = MaterialTheme.colorScheme.secondary
-                    ),
-                    shape = RoundedCornerShape(15.dp),
-                    elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
-                    onClick = onAccept
-                ) {
-                    Text(
-                        text = "Terima",
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            color = MaterialTheme.colorScheme.onSecondary
+                    items(terms) { (title, content) ->
+                        SectionTitle(
+                            title = title
                         )
-                    )
+                        Text(
+                            text = content,
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(bottom = 16.dp)
+                        )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+                if (!isLoading.value) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly
+                    ) {
+                        ElevatedButton(
+                            shape = RoundedCornerShape(15.dp),
+                            elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
+                            onClick = onDecline
+                        ) {
+                            Text(
+                                text = "Tolak",
+                                fontSize = MaterialTheme.typography.bodyMedium.fontSize
+                            )
+                        }
+
+                        ElevatedButton(
+                            colors = ButtonDefaults.elevatedButtonColors(
+                                containerColor = MaterialTheme.colorScheme.secondary
+                            ),
+                            shape = RoundedCornerShape(15.dp),
+                            elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
+                            onClick = {
+                                isLoading.value = true
+                            }
+                        ) {
+                            Text(
+                                text = "Terima",
+                                style = MaterialTheme.typography.bodyMedium.copy(
+                                    color = MaterialTheme.colorScheme.onSecondary
+                                )
+                            )
+                        }
+                    }
                 }
             }
+        }
+    }
+    if (isLoading.value) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize(),
+            contentAlignment = Alignment.Center,
+        ) {
+            Text(
+                text = "Loading...",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
