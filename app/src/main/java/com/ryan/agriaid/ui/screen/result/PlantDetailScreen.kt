@@ -1,5 +1,6 @@
 package com.ryan.agriaid.ui.screen.result
 
+import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -48,6 +49,8 @@ fun PlantDetailScreen(plantName: String) {
     } ?: run {
         Text(text = "Loading...")
     }
+
+    Log.e("test", "plant details : ${plantDetails?.avgSoil}")
 }
 
 @Composable
@@ -91,7 +94,52 @@ fun PlantDetailContent(plantDetails: PlantDetails) {
             )
             Spacer(modifier = Modifier.height(16.dp))
         }
+        item {
+            SectionTitle(title = "Kondisi Optimal untuk tanaman ${plantDetails.plant.name}")
+        }
+        items(plantDetails.avgSoil) { soil ->
+            Column(
+                modifier = Modifier
+                    .border(1.dp, Color.Black)
+                    .fillMaxWidth()
+            ) {
+                val data = listOf(
+                    "N :" to "±${soil.n}ppm",
+                    "P :" to "±${soil.p}ppm",
+                    "K :" to "±${soil.k}ppm",
+                    "pH :" to "±${soil.ph}",
+                    "Suhu :" to "±${soil.temperature}°C",
+                    "Kelembaban :" to "±${soil.humidity}%",
+                    "Curah Hujan :" to "±${soil.rainfall}mm"
+                )
 
+                data.forEach { (label, value) ->
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            modifier = Modifier
+                                .fillMaxWidth(0.5f)
+                                .padding(start = 4.dp),
+                            text = label,
+                            style = MaterialTheme.typography.bodyMedium.copy(
+                                fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                                fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                                textAlign = TextAlign.Justify
+                            )
+                        )
+                        Text(
+                            modifier = Modifier.fillMaxWidth(1f),
+                            text = value
+                        )
+                    }
+                }
+            }
+        }
         item { SectionTitle(title = "Persiapan Lahan") }
         items(plantDetails.landPreparations) { preparation ->
             Column(

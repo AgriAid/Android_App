@@ -5,7 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = "fertilization",
+    tableName = "avgSoil",
     foreignKeys = [ForeignKey(
         entity = Plants::class,
         parentColumns = ["id"],
@@ -13,13 +13,14 @@ import androidx.room.PrimaryKey
         onDelete = ForeignKey.CASCADE
     )]
 )
-data class Fertilization(
+data class AvgSoil(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val plantsId: Int,
-    val type: String,
-    val agePlant: String,
-    val urea: String,
-    val tsp: String,
-    val kcl: String,
-    val organicFertilizer: String?
+    val n: String,
+    val p: String,
+    val k: String,
+    val temperature: String,
+    val humidity: String,
+    val ph: String,
+    val rainfall: String,
 )

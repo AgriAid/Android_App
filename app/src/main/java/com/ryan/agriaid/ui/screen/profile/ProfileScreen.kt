@@ -47,14 +47,7 @@ fun ProfileScreen(
     isLogin: Boolean,
     onClick: () -> Unit,
 ) {
-    LocalContext.current
     val dataMenuItems = listOf(
-        MenuData(
-            icon = R.drawable.plant,
-            title = "Daftar Tanaman",
-            onClick = {
-                navController.navigate(NavRoutes.PlantsList)
-            }),
         MenuData(
             icon = R.drawable.guide,
             title = "Panduan",
@@ -62,14 +55,36 @@ fun ProfileScreen(
                 navController.navigate(NavRoutes.Guide)
             }),
         MenuData(
+            icon = R.drawable.plant,
+            title = "Daftar Tanaman",
+            onClick = {
+                navController.navigate(NavRoutes.PlantsList)
+            }),
+        MenuData(
+            icon = R.drawable.shot,
+            title = "Pindai penyakit",
+            develop = true,
+            onClick = { context ->
+                Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            }),
+        MenuData(
             icon = R.drawable.notification,
             title = "Pemberitahuan",
+            develop = true,
+            onClick = { context ->
+                Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
+            }),
+        MenuData(
+            icon = R.drawable.conversation,
+            title = "Konsultasi",
+            develop = true,
             onClick = { context ->
                 Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
             }),
         MenuData(
             icon = R.drawable.support,
             title = "Bantuan",
+            develop = true,
             onClick = { context ->
                 Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
             }),
@@ -108,7 +123,7 @@ fun ProfileScreen(
                 Text(
                     fontSize = MaterialTheme.typography.titleLarge.fontSize,
                     fontWeight = MaterialTheme.typography.titleLarge.fontWeight,
-                    text = user?.username ?: "Petani Singkkong",
+                    text = user?.username ?: "Petani Milenial",
                 )
                 Text(
                     fontSize = MaterialTheme.typography.bodySmall.fontSize,
@@ -128,6 +143,7 @@ fun MenuList(
     isLogin: Boolean,
     onClick: () -> Unit,
 ) {
+    val context = LocalContext.current
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -139,6 +155,7 @@ fun MenuList(
             MenuItem(
                 icon = menuItem.icon,
                 title = menuItem.title,
+                isDevelop = menuItem.develop,
                 onClick = menuItem.onClick
             )
         }
@@ -152,7 +169,10 @@ fun MenuList(
                 ElevatedButton(
                     shape = RoundedCornerShape(15.dp),
                     elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
-                    onClick = onClick
+                    onClick = {
+                        Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 )
                 {
                     Text(text = if (isLogin) "Keluar" else "Masuk")
@@ -166,6 +186,7 @@ fun MenuList(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(100.dp))
         }
     }
 }

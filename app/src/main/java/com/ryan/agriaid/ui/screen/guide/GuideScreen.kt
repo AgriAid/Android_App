@@ -79,91 +79,25 @@ fun GuideScreen() {
 
 @Composable
 fun Glossary() {
+    val glossaryItems = listOf(
+        "IKT" to "Indeks Kecocokan Tanah. Nilai yang menunjukkan seberapa cocok suatu tanah untuk jenis tanaman tertentu. Nilai IKT biasanya berada dalam skala 1 hingga 100, di mana nilai yang lebih tinggi menunjukkan kecocokan yang lebih tinggi.",
+        "N" to "Nitrogen. Nutrisi penting untuk pertumbuhan tanaman, berperan dalam pembentukan daun dan batang yang sehat.",
+        "P" to "Fosfor. Nutrisi yang mendukung pertumbuhan akar, pembungaan, dan pembuahan tanaman.",
+        "K" to "Kalium. Nutrisi yang membantu pengaturan air dalam tanaman, meningkatkan ketahanan terhadap penyakit.",
+        "pH" to "Tingkat keasaman atau kebasaan tanah. pH tanah mempengaruhi ketersediaan nutrisi dan kesehatan tanaman.",
+        "Suhu" to "Temperatur lingkungan yang mempengaruhi pertumbuhan tanaman, termasuk suhu optimal untuk berbagai jenis tanaman, menggunakan Celcius.",
+        "Kelembapan" to "Jumlah uap air di udara yang mempengaruhi proses fotosintesis dan kebutuhan air tanaman.",
+        "Curah Hujan" to "Jumlah total air hujan yang diterima oleh tanah, mempengaruhi ketersediaan air untuk tanaman."
+    )
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        Column {
-            Text(
-                text = "IKT : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Indeks Kecocokan Tanah. Nilai yang menunjukkan seberapa cocok suatu tanah untuk jenis tanaman tertentu. Nilai IKT biasanya berada dalam skala 1 hingga 100, di mana nilai yang lebih tinggi menunjukkan kecocokan yang lebih tinggi."
-            )
-        }
-        Column {
-            Text(
-                text = "N : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Nitrogen. Nutrisi penting untuk pertumbuhan tanaman, berperan dalam pembentukan daun dan batang yang sehat."
-            )
-        }
-        Column {
-            Text(
-                text = "P : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Fosfor. Nutrisi yang mendukung pertumbuhan akar, pembungaan, dan pembuahan tanaman."
-            )
-        }
-        Column {
-            Text(
-                text = "K : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Kalium. Nutrisi yang membantu pengaturan air dalam tanaman, meningkatkan ketahanan terhadap penyakit."
-            )
-        }
-        Column {
-            Text(
-                text = "pH : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Tingkat keasaman atau kebasaan tanah. pH tanah mempengaruhi ketersediaan nutrisi dan kesehatan tanaman."
-            )
-        }
-        Column {
-            Text(
-                text = "Suhu : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Temperatur lingkungan yang mempengaruhi pertumbuhan tanaman, termasuk suhu optimal untuk berbagai jenis tanaman, menggunakan Celcius."
-            )
-        }
-        Column {
-            Text(
-                text = "Kelembapan : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Jumlah uap air di udara yang mempengaruhi proses fotosintesis dan kebutuhan air tanaman."
-            )
-        }
-        Column {
-            Text(
-                text = "Curah Hujan : ", style = MaterialTheme.typography.titleMedium.copy(
-                    color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
-                )
-            )
-            Text(
-                text = "Jumlah total air hujan yang diterima oleh tanah, mempengaruhi ketersediaan air untuk tanaman."
-            )
+        glossaryItems.forEach { (title, description) ->
+            GlossaryItem(title, description)
         }
     }
 }
@@ -260,26 +194,17 @@ fun AppGuide() {
     }
 }
 
+
 @Composable
-fun GuideStep(stepNumber: Int, title: String, description: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp)
-    ) {
+fun GlossaryItem(title: String, description: String) {
+    Column {
         Text(
-            text = "Langkah $stepNumber: $title",
-            style = MaterialTheme.typography.bodyLarge.copy(
-                color = MaterialTheme.colorScheme.primary
+            text = "$title : ",
+            style = MaterialTheme.typography.titleMedium.copy(
+                color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
             )
         )
-        Spacer(modifier = Modifier.height(4.dp))
-        Text(
-            text = description,
-            style = MaterialTheme.typography.bodyLarge.copy(
-                color = MaterialTheme.colorScheme.onBackground
-            )
-        )
+        Text(text = description)
     }
 }
 
@@ -314,6 +239,29 @@ fun MeasurementItem(
         Text(
             text = measurementGuide, style = MaterialTheme.typography.bodyLarge.copy(
                 textAlign = TextAlign.Justify
+            )
+        )
+    }
+}
+
+@Composable
+fun GuideStep(stepNumber: Int, title: String, description: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+    ) {
+        Text(
+            text = "Langkah $stepNumber: $title",
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = MaterialTheme.colorScheme.secondary.copy(blue = 0.3f)
+            )
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text(
+            text = description,
+            style = MaterialTheme.typography.bodyLarge.copy(
+                color = MaterialTheme.colorScheme.onBackground
             )
         )
     }
