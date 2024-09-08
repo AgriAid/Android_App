@@ -31,6 +31,7 @@ import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -46,7 +47,7 @@ import com.ryan.agriaid.utility.checkForEmptyFields
 import com.ryan.agriaid.utility.validateAndResetInputs
 
 @Composable
-fun PredictScreen(navController: NavController) {
+fun InputScreen(navController: NavController) {
     var nitrogen by remember { mutableStateOf("") }
     var fosfor by remember { mutableStateOf("") }
     var kalium by remember { mutableStateOf("") }
@@ -79,9 +80,9 @@ fun PredictScreen(navController: NavController) {
             avgRainfall = ""
         } else {
             val (temp, humidity, rainfall) = weatherViewModel.getAverageTempAndHumidityRainfall()
-            avgTemp = temp.toInt().toString()
-            avgHumidity = humidity.toInt().toString()
-            avgRainfall = rainfall.toInt().toString()
+            avgTemp = temp.toString()
+            avgHumidity = humidity.toString()
+            avgRainfall = rainfall.toString()
         }
     }
 
@@ -169,6 +170,7 @@ fun PredictScreen(navController: NavController) {
                             .padding(vertical = 8.dp)
                     ) {
                         Checkbox(
+                            modifier = Modifier.testTag("autoParamsCheckbox"),
                             checked = enableEdit,
                             onCheckedChange = {
                                 enableEdit = it
@@ -233,7 +235,7 @@ fun PredictScreen(navController: NavController) {
                                     showValidation = true
                                     Toast.makeText(
                                         context,
-                                        "Please fill in all the fields",
+                                        "Harap isi semua kolom !!!",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -251,7 +253,7 @@ fun PredictScreen(navController: NavController) {
                                     showValidation = true
                                     Toast.makeText(
                                         context,
-                                        "Some inputs are out of range, please correct them.",
+                                        "Beberapa masukan berada di luar jangkauan, harap perbaiki!!",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -283,7 +285,7 @@ fun PredictScreen(navController: NavController) {
                         } catch (e: NumberFormatException) {
                             Toast.makeText(
                                 context,
-                                "Please enter valid numbers",
+                                "Harap masukkan angka yang valid",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }

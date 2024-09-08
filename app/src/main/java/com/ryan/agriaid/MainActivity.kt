@@ -5,7 +5,6 @@ import android.app.Activity
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
@@ -13,7 +12,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.QuestionMark
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -28,7 +26,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -39,7 +36,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.ryan.agriaid.data.ViewModelFactory
-import com.ryan.agriaid.data.local.user.User
 import com.ryan.agriaid.data.local.user.UserViewModel
 import com.ryan.agriaid.navigation.BottomNavigationBar
 import com.ryan.agriaid.navigation.NavRoutes
@@ -47,8 +43,8 @@ import com.ryan.agriaid.ui.screen.article.ArticleScreen
 import com.ryan.agriaid.ui.screen.guide.GuideScreen
 import com.ryan.agriaid.ui.screen.home.HomeScreen
 import com.ryan.agriaid.ui.screen.plantslist.PlantsListScreen
-import com.ryan.agriaid.ui.screen.recomendation.PredictScreen
 import com.ryan.agriaid.ui.screen.profile.ProfileScreen
+import com.ryan.agriaid.ui.screen.recomendation.InputScreen
 import com.ryan.agriaid.ui.screen.result.PlantDetailScreen
 import com.ryan.agriaid.ui.screen.result.ResultScreen
 import com.ryan.agriaid.ui.screen.termsandconditions.TermsAndConditionsScreen
@@ -185,7 +181,7 @@ fun MainScreen() {
                 )
             }
             composable(NavRoutes.Predict) {
-                PredictScreen(navController)
+                InputScreen(navController)
             }
             composable(NavRoutes.PlantsList) {
                 PlantsListScreen(navController = navController)
@@ -194,21 +190,7 @@ fun MainScreen() {
                 ProfileScreen(
                     user = user,
                     isLogin = isLogin,
-                    navController = navController,
-                    onClick = {
-                        if (user != null) {
-                            userViewModel.clearUser()
-                        } else {
-                            userViewModel.saveUser(
-                                User(
-                                    1,
-                                    "Riyan",
-                                    "Admin",
-                                    "https://st3.depositphotos.com/15648834/17930/v/450/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-                                )
-                            )
-                        }
-                    }
+                    navController = navController
                 )
             }
             composable(
