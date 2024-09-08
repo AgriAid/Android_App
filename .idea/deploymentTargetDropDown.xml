@@ -2,8 +2,24 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="MainScreenTest">
+      <entry key="RecommendationScreenTest">
         <State />
+      </entry>
+      <entry key="ResultScreenTest">
+        <State>
+          <targetSelectedWithDropDown>
+            <Target>
+              <type value="QUICK_BOOT_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="VIRTUAL_DEVICE_PATH" />
+                  <value value="$USER_HOME$/.android/avd/Iphone_X.avd" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </targetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-07-12T14:25:42.277121Z" />
+        </State>
       </entry>
       <entry key="app">
         <State>
@@ -21,21 +37,14 @@
           <timeTargetWasSelectedWithDropDown value="2024-07-06T17:52:25.670463Z" />
         </State>
       </entry>
-      <entry key="testMainScreen()">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="$USER_HOME$/.android/avd/Iphone_X.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-07-10T15:36:54.936392Z" />
-        </State>
+      <entry key="testResultScreenDisplaysCorrectly()">
+        <State />
+      </entry>
+      <entry key="testToastOnValidationFailure()">
+        <State />
+      </entry>
+      <entry key="testValidationAndResetInputs()">
+        <State />
       </entry>
     </value>
   </component>

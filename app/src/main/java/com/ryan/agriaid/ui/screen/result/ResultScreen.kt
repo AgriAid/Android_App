@@ -33,11 +33,8 @@ import com.ryan.agriaid.ui.components.CustomCard
 fun ResultScreen(
     navController: NavController,
     results: List<Pair<String, Double>>,
+    plantViewModel: PlantViewModel = viewModel(factory = ViewModelFactory.getInstance(LocalContext.current))
 ) {
-    val context = LocalContext.current
-    val plantViewModel: PlantViewModel =
-        viewModel(factory = ViewModelFactory.getInstance(context))
-
     var plantsData by remember { mutableStateOf<List<Plants>?>(null) }
 
     LaunchedEffect(results) {
@@ -132,9 +129,6 @@ fun ResultScreen(
             }
         } ?: run {
             Text("Loading...")
-            results.forEach { (name, value) ->
-                Text(text = "Plant: $name, Score: $value")
-            }
         }
     }
 }

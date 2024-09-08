@@ -71,13 +71,19 @@ fun validateAndResetInputs(
         onInvalid()
     }
 
+    fun formatValue(value: Float?): String {
+        return value?.let {
+            "%.2f".format(it)
+        } ?: ""
+    }
+
     return listOf(
-        nitrogenValue?.toInt()?.toString() ?: "",
-        fosforValue?.toInt()?.toString() ?: "",
-        kaliumValue?.toInt()?.toString() ?: "",
-        phValue?.toInt()?.toString() ?: "",
-        avgTempValue?.toInt()?.toString() ?: "",
-        avgHumidityValue?.toInt()?.toString() ?: "",
-        avgRainfallValue?.toInt()?.toString() ?: ""
+        formatValue(nitrogenValue),
+        formatValue(fosforValue),
+        formatValue(kaliumValue),
+        formatValue(phValue),
+        formatValue(avgTempValue),
+        formatValue(avgHumidityValue),
+        formatValue(avgRainfallValue)
     )
 }

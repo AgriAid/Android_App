@@ -45,7 +45,6 @@ fun ProfileScreen(
     navController: NavController,
     user: User?,
     isLogin: Boolean,
-    onClick: () -> Unit,
 ) {
     val dataMenuItems = listOf(
         MenuData(
@@ -63,28 +62,24 @@ fun ProfileScreen(
         MenuData(
             icon = R.drawable.shot,
             title = "Pindai penyakit",
-            develop = true,
             onClick = { context ->
                 Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
             }),
         MenuData(
             icon = R.drawable.notification,
             title = "Pemberitahuan",
-            develop = true,
             onClick = { context ->
                 Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
             }),
         MenuData(
             icon = R.drawable.conversation,
             title = "Konsultasi",
-            develop = true,
             onClick = { context ->
                 Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
             }),
         MenuData(
             icon = R.drawable.support,
             title = "Bantuan",
-            develop = true,
             onClick = { context ->
                 Toast.makeText(context, "Sedang dalam pengembangan", Toast.LENGTH_SHORT).show()
             }),
@@ -133,15 +128,14 @@ fun ProfileScreen(
             }
         }
         Spacer(modifier = Modifier.height(30.dp))
-        MenuList(dataMenuItems = dataMenuItems, isLogin, onClick = onClick)
+        MenuList(dataMenuItems = dataMenuItems, isLogin)
     }
 }
 
 @Composable
 fun MenuList(
     dataMenuItems: List<MenuData>,
-    isLogin: Boolean,
-    onClick: () -> Unit,
+    isLogin: Boolean
 ) {
     val context = LocalContext.current
     LazyColumn(

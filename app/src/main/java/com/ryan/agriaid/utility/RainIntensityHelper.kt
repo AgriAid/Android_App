@@ -1,7 +1,6 @@
 package com.ryan.agriaid.utility
 
 object RainIntensityHelper {
-    // conversi ke mm
     private val rainIntensityMap = mapOf(
         500 to 2.5,
         501 to 30.0,

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 
-class PreferencesHelper(context: Context) {
+open class PreferencesHelper(context: Context) {
     private val sharedPreferences: SharedPreferences =
         context.getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
@@ -12,7 +12,7 @@ class PreferencesHelper(context: Context) {
         sharedPreferences.edit().putBoolean("terms_accepted", accepted).apply()
     }
 
-    fun isTermsAccepted(): Boolean {
+    open fun isTermsAccepted(): Boolean {
         return sharedPreferences.getBoolean("terms_accepted", false)
     }
 

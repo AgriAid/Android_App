@@ -82,6 +82,4 @@ class UtilityTests {
         )
         assertEquals(expected, parseResultsString(input))
     }
-
-
 }
