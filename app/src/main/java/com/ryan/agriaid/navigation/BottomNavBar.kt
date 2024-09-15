@@ -7,14 +7,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AdsClick
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +25,9 @@ import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -44,40 +43,6 @@ fun BottomNavigationBar(navController: NavController) {
     Box(
         contentAlignment = Alignment.BottomCenter
     ) {
-        Box(
-            modifier = Modifier.height(90.dp),
-            contentAlignment = Alignment.TopCenter
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(60.dp)
-                    .background(
-                        color = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
-                        shape = RoundedCornerShape(60.dp)
-                    )
-                    .clickable {
-                        navController.navigate(BottomNavItem.Predict.route) {
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route) {
-                                    saveState = true
-                                }
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    },
-                contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 15.dp),
-                    painter = painterResource(R.drawable.scan),
-                    contentDescription = "Predict",
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-            }
-        }
         BottomAppBar(
             containerColor = Color.Transparent,
             contentColor = Color.White,
@@ -91,7 +56,7 @@ fun BottomNavigationBar(navController: NavController) {
         ) {
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxSize(),
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.Bottom
             ) {
@@ -107,7 +72,7 @@ fun BottomNavigationBar(navController: NavController) {
                             icon = {
                                 Icon(
                                     modifier = Modifier
-                                        .size(if (isSelected) 25.dp else 20.dp),
+                                        .size(if (isSelected) 28.dp else 25.dp),
                                     painter = painterResource(if (isSelected) item.iconActive else item.icon),
                                     contentDescription = item.title
                                 )
@@ -135,5 +100,45 @@ fun BottomNavigationBar(navController: NavController) {
                 }
             }
         }
+        Box(
+            modifier = Modifier.height(90.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Box(
+                modifier = Modifier
+                    .size(60.dp)
+                    .background(
+                        color = MaterialTheme.colorScheme.secondary.copy(blue = 0.5f),
+                        shape = RoundedCornerShape(60.dp)
+                    )
+                    .clickable {
+                        navController.navigate(BottomNavItem.Predict.route) {
+                            navController.graph.startDestinationRoute?.let { route ->
+                                popUpTo(route) {
+                                    saveState = true
+                                }
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
+                    },
+                contentAlignment = Alignment.Center
+            ) {
+                Icon(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 12.dp),
+                    painter = painterResource(R.drawable.scan),
+                    contentDescription = "Predict",
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
+            }
+        }
     }
+}
+
+@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun BottomNavBarPreview() {
+    BottomNavigationBar(navController = NavController(LocalContext.current))
 }
