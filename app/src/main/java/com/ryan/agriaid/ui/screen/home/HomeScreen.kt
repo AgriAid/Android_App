@@ -14,7 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
@@ -153,7 +154,7 @@ fun HomeScreen(
             temp = weatherData?.temp ?: 0.0,
             weatherCode = weatherData?.code,
 
-        )
+            )
         BannerSection(
             navController = navController,
             characteristicsData = characteristicList,
@@ -169,7 +170,7 @@ fun GreetingSection(
     imageUrl: Comparable<*>,
     cityName: String = "tidak ada data",
     temp: Double = 0.0,
-    weatherCode: Int?
+    weatherCode: Int?,
 ) {
     val gradientStart = colorResource(R.color.white)
     val gradientEnd = colorResource(R.color.gradientEnd)
@@ -251,7 +252,7 @@ fun GreetingSection(
                         Row {
                             Icon(
                                 imageVector = ImageVector.vectorResource(R.drawable.location),
-                                contentDescription = "Favorite Icon",
+                                contentDescription = "icon location",
                                 tint = MaterialTheme.colorScheme.primary
                             )
                             Spacer(modifier = Modifier.width(5.dp))
@@ -283,10 +284,12 @@ fun GreetingSection(
 @Composable
 fun BannerSection(
     navController: NavController,
-    characteristicsData: List<CardInfoData>,
-    articles: List<Article>,
+    characteristicsData: List<CardInfoData>, articles: List<Article>,
 ) {
+    val listState = rememberLazyListState()
+
     LazyColumn(
+        state = listState,
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 20.dp),
@@ -309,7 +312,6 @@ fun BannerSection(
                 mainAxisAlignment = MainAxisAlignment.SpaceBetween,
                 crossAxisAlignment = FlowCrossAxisAlignment.Center
             ) {
-
                 characteristicsData.forEach { cardInfo ->
                     CardInfo(
                         iconResId = cardInfo.icon,
@@ -318,19 +320,20 @@ fun BannerSection(
                     )
                 }
             }
+            Spacer(modifier = Modifier.height(5.dp))
         }
 
         item {
-            Spacer(modifier = Modifier.height(5.dp))
             Text(
                 fontSize = MaterialTheme.typography.titleMedium.fontSize,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.onBackground,
                 text = "Tips & Trik"
             )
+            Spacer(modifier = Modifier.height(10.dp))
         }
 
-        items(articles) { article ->
+        itemsIndexed(articles) { _, article ->
             BannerArticle(
                 title = article.title,
                 articleImage = article.articleImg,
@@ -340,10 +343,7 @@ fun BannerSection(
                 }
             )
         }
-
-        item {
-            Spacer(modifier = Modifier.height(80.dp))
-        }
+        item { Spacer(modifier = Modifier.height(80.dp)) }
     }
 }
 

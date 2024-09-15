@@ -30,6 +30,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +53,7 @@ fun CustomCard(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
+            .semantics { contentDescription = "Kartu tanaman: $label" }
     ) {
         Row(
             modifier = Modifier
@@ -68,7 +71,7 @@ fun CustomCard(
                 ) {
                     AsyncImage(
                         model = imageUrl,
-                        contentDescription = "Plant Image",
+                        contentDescription = "Gambar tanaman $label",
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(100.dp)
@@ -101,7 +104,8 @@ fun CustomCard(
                             color = MaterialTheme.colorScheme.secondary,
                             fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
                             fontSize = MaterialTheme.typography.titleMedium.fontSize
-                        )
+                        ),
+                        modifier = Modifier.semantics { contentDescription = "Nama tanaman: $label" }
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
@@ -109,7 +113,8 @@ fun CustomCard(
                         style = MaterialTheme.typography.bodySmall,
                         textAlign = TextAlign.Start,
                         maxLines = 3,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        modifier = Modifier.semantics { contentDescription = "Deskripsi tanaman: $description" }
                     )
                     if (ikt != null) {
                         Row(
@@ -137,7 +142,7 @@ fun CustomCard(
             Spacer(modifier = Modifier.size(6.dp))
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
-                contentDescription = "Arrow",
+                contentDescription = "Navigasi ke detail tanaman $label",
                 modifier = Modifier.size(25.dp),
                 tint = MaterialTheme.colorScheme.primary
             )
