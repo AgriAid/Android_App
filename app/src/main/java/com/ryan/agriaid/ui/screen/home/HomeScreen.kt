@@ -42,11 +42,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import coil.compose.AsyncImage
 import com.google.accompanist.flowlayout.FlowCrossAxisAlignment
 import com.google.accompanist.flowlayout.FlowRow
@@ -360,14 +358,4 @@ private fun getWeatherImageDrawable(weatherCode: Int, isDayTime: Boolean): Int {
         800 -> if (isDayTime) R.drawable.sunny else R.drawable.night
         else -> R.drawable.rain
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeScreenPreview() {
-    val navController = rememberNavController()
-    HomeScreen(
-        navController = navController,
-        user = User(1, "JohnDoe", "Admin", "https://example.com/johndoe.png"),
-    )
 }
