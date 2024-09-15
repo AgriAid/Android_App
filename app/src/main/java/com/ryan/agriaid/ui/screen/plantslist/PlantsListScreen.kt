@@ -17,8 +17,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -28,6 +31,7 @@ import com.ryan.agriaid.data.local.plants.Plants
 import com.ryan.agriaid.navigation.NavRoutes
 import com.ryan.agriaid.ui.components.CustomCard
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun PlantsListScreen(
     navController: NavController,
@@ -66,7 +70,9 @@ fun PlantsListScreen(
                 verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 item {
-                    Spacer(modifier = Modifier.height(50.dp))
+                    Spacer(modifier = Modifier
+                        .height(50.dp)
+                        .semantics { invisibleToUser() })
                 }
                 items(plantsData) { plant ->
                     CustomCard(
