@@ -2,6 +2,7 @@ package com.ryan.agriaid.ui.screen.home
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -225,6 +226,7 @@ fun GreetingSection(
                         modifier = Modifier
                             .size(80.dp)
                             .clip(CircleShape)
+                            .border(width = 0.4.dp, color = Color.DarkGray, shape = CircleShape)
                     )
                 }
             }
