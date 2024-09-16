@@ -21,15 +21,14 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.delay
 import com.ryan.agriaid.ui.components.SectionTitle
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -107,7 +106,7 @@ fun TermsAndConditionsScreen(
 
                         ElevatedButton(
                             colors = ButtonDefaults.elevatedButtonColors(
-                                containerColor = MaterialTheme.colorScheme.secondary
+                                containerColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f)
                             ),
                             shape = RoundedCornerShape(15.dp),
                             elevation = ButtonDefaults.elevatedButtonElevation(5.dp),
@@ -118,7 +117,7 @@ fun TermsAndConditionsScreen(
                             Text(
                                 text = "Terima",
                                 style = MaterialTheme.typography.bodyMedium.copy(
-                                    color = MaterialTheme.colorScheme.onSecondary
+                                    color = MaterialTheme.colorScheme.onSurface
                                 )
                             )
                         }

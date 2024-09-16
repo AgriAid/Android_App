@@ -217,9 +217,7 @@ fun InputScreen(navController: NavController) {
             ) {
                 Button(
                     colors = ButtonDefaults.buttonColors(
-                        MaterialTheme.colorScheme.secondary.copy(
-                            blue = 0.5f
-                        )
+                        MaterialTheme.colorScheme.secondary.copy(alpha = 0.8f)
                     ),
                     elevation = ButtonDefaults.buttonElevation(3.dp),
                     onClick = {
@@ -291,10 +289,13 @@ fun InputScreen(navController: NavController) {
                         }
                     }
                 ) {
-                    Text("Rekomendasikan")
+                    Text(
+                        text = "Rekomendasikan",
+                        fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
                 }
             }
         }
     }
 }
-

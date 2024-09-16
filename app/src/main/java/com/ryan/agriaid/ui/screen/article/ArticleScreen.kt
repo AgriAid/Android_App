@@ -87,7 +87,7 @@ fun ArticleContent(articleWithDetails: ArticleWithDetails, context: Context) {
             Spacer(modifier = Modifier.height(50.dp))
             AsyncImage(
                 model = articleWithDetails.articleImg,
-                contentDescription = "Article Image Banner",
+                contentDescription = "Gambar artikel ${articleWithDetails.title}",
                 contentScale = ContentScale.FillWidth,
                 modifier = Modifier
                     .fillMaxWidth()

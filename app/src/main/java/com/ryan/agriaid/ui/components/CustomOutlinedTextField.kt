@@ -27,7 +27,7 @@ fun CustomOutlinedTextField(
     modifier: Modifier = Modifier,
     imeAction: ImeAction,
     onImeAction: () -> Unit,
-    borderColor: Color = MaterialTheme.colorScheme.primary.copy(blue = 0.5f)
+    borderColor: Color = MaterialTheme.colorScheme.primary.copy(blue = 0.2f)
 ) {
     Column(
         modifier = Modifier
@@ -42,7 +42,7 @@ fun CustomOutlinedTextField(
             onValueChange = onValueChange,
             shape = MaterialTheme.shapes.large,
             label = { Text(label) },
-            textStyle = TextStyle.Default.copy(color = MaterialTheme.colorScheme.primary.copy(blue = 0.5f)),
+            textStyle = TextStyle.Default.copy(color = MaterialTheme.colorScheme.primary.copy(blue = 0.2f)),
             colors = OutlinedTextFieldDefaults.colors(
                 focusedBorderColor = borderColor,
                 unfocusedBorderColor = borderColor

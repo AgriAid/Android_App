@@ -1,6 +1,5 @@
 package com.ryan.agriaid.ui.screen.result
 
-import android.util.Log
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -49,8 +48,6 @@ fun PlantDetailScreen(plantName: String) {
     } ?: run {
         Text(text = "Loading...")
     }
-
-    Log.e("test", "plant details : ${plantDetails?.avgSoil}")
 }
 
 @Composable
@@ -69,7 +66,7 @@ fun PlantDetailContent(plantDetails: PlantDetails) {
             ) {
                 AsyncImage(
                     model = plantDetails.plant.imgUrl,
-                    contentDescription = "Image Plant",
+                    contentDescription = "gambar tanaman ${plantDetails.plant.name}",
                     modifier = Modifier
                         .size(200.dp)
                 )
@@ -77,7 +74,7 @@ fun PlantDetailContent(plantDetails: PlantDetails) {
                 Text(
                     text = plantDetails.plant.name.toTitleCase(),
                     style = MaterialTheme.typography.titleLarge.copy(
-                        color = MaterialTheme.colorScheme.secondary,
+                        color = MaterialTheme.colorScheme.primary,
                         fontWeight = MaterialTheme.typography.titleLarge.fontWeight,
                         fontSize = MaterialTheme.typography.titleLarge.fontSize
                     )
@@ -87,6 +84,7 @@ fun PlantDetailContent(plantDetails: PlantDetails) {
             Text(
                 text = plantDetails.plant.description,
                 style = MaterialTheme.typography.bodyMedium.copy(
+                    color = MaterialTheme.colorScheme.onSurface,
                     fontSize = MaterialTheme.typography.bodyMedium.fontSize,
                     fontWeight = MaterialTheme.typography.bodyMedium.fontWeight,
                     textAlign = TextAlign.Justify
